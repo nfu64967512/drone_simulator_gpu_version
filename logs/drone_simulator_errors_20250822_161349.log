@@ -1,0 +1,4 @@
+2025-08-22 16:13:52 - simulator.drone_simulator - ERROR - wrapper:141 - 💥 _update_3d_plot failed after 0.007s: name 'TakeoffConfig' is not defined
+2025-08-22 16:13:52 - simulator.drone_simulator - ERROR - run:119 - 💥 Fatal error in simulator: name 'TakeoffConfig' is not defined
+2025-08-22 16:13:57 - gui.main_window - ERROR - show_error:541 - Error dialog: Fatal Error - Simulator encountered a fatal error:
+name 'TakeoffConfig' is not defined

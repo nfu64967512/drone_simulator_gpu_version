@@ -1,0 +1,213 @@
+2025-08-22 16:16:34 - root - INFO - setup_logging:90 - ============================================================
+2025-08-22 16:16:34 - root - INFO - setup_logging:91 - 🚁 Advanced Drone Swarm Simulator v5.1 - Logging Started
+2025-08-22 16:16:34 - root - INFO - setup_logging:92 - ============================================================
+2025-08-22 16:16:34 - root - INFO - setup_logging:93 - 📝 Log Level: INFO
+2025-08-22 16:16:34 - root - INFO - setup_logging:94 - 📁 Log Directory: C:\Users\User\Documents\drone_simulator\logs
+2025-08-22 16:16:34 - root - INFO - setup_logging:95 - 💾 Max File Size: 10.0MB
+2025-08-22 16:16:34 - root - INFO - setup_logging:96 - 🔄 Backup Count: 5
+2025-08-22 16:16:34 - root - INFO - main:21 - 🚁 Advanced Drone Swarm Simulator v5.1 Starting
+2025-08-22 16:16:34 - root - INFO - main:22 - 🆕 New Features: Collision Logging, 6m Spacing, English UI, Mouse Zoom
+2025-08-22 16:16:35 - root - INFO - main:38 - ✅ Environment setup complete
+2025-08-22 16:16:35 - root - INFO - main:39 - 🎯 Version Features: Collision Detection, Mouse Zoom, 2x2 6m Takeoff, LOITER Avoidance, Collision Logging
+2025-08-22 16:16:35 - simulator - INFO - _initialize_package:282 - 📦 Simulator package v5.1.0 initialized
+2025-08-22 16:16:36 - root - WARNING - <module>:252 - Package import warning: cannot import name 'setup_logging' from 'utils' (c:\Users\User\Documents\drone_simulator\utils\__init__.py)
+2025-08-22 16:16:36 - simulator.drone_simulator - INFO - __init__:55 - 🚁 Initializing Advanced Drone Simulator v5.1
+2025-08-22 16:16:36 - core.collision_avoidance - INFO - __init__:29 - Collision avoidance system initialized with safety distance: 5.0m
+2025-08-22 16:16:36 - core.flight_manager - INFO - __init__:25 - TakeoffManager initialized with 6.0m spacing
+2025-08-22 16:16:36 - core.collision_logger - INFO - initialize_log_file:44 - Collision logger initialized: drone_simulator_collisions_20250822_161636.json
+2025-08-22 16:16:36 - simulator.drone_simulator - INFO - __init__:90 - ✅ Advanced Drone Simulator initialized successfully
+2025-08-22 16:16:36 - simulator.drone_simulator - INFO - run:96 - 🚀 Starting Advanced Drone Simulator
+2025-08-22 16:16:36 - simulator.drone_simulator - INFO - _setup_gui:128 - 🖥️ Setting up GUI components
+2025-08-22 16:16:36 - gui.main_window - INFO - create_window:33 - Creating main window
+2025-08-22 16:16:36 - gui.main_window - INFO - create_window:57 - Main window created successfully
+2025-08-22 16:16:36 - gui.control_panel - INFO - __init__:31 - Control panel initialized
+2025-08-22 16:16:36 - gui.control_panel - INFO - create_panel:62 - Creating control panel
+2025-08-22 16:16:36 - gui.control_panel - INFO - create_panel:78 - Control panel created successfully
+2025-08-22 16:16:36 - gui.plot_manager - INFO - __init__:49 - 3D Plot Manager initialized
+2025-08-22 16:16:36 - gui.plot_manager - INFO - setup_plot:63 - Setting up 3D plot
+2025-08-22 16:16:37 - gui.plot_manager - INFO - setup_plot:103 - 3D plot setup completed
+2025-08-22 16:16:37 - gui.main_window - INFO - create_menu:91 - Creating menu bar
+2025-08-22 16:16:37 - gui.main_window - INFO - create_menu:108 - Menu bar created successfully
+2025-08-22 16:16:37 - gui.main_window - INFO - bind_shortcuts:262 - Binding keyboard shortcuts
+2025-08-22 16:16:37 - simulator.drone_simulator - INFO - _setup_gui:150 - ✅ GUI setup completed
+2025-08-22 16:16:37 - simulator.drone_simulator - INFO - _register_callbacks:154 - 🔗 Registering callbacks
+2025-08-22 16:16:37 - utils.logging_config - INFO - log_system_info:239 - 🖥️  System Information:
+2025-08-22 16:16:37 - utils.logging_config - INFO - log_system_info:240 -    Platform: Windows 11
+2025-08-22 16:16:37 - utils.logging_config - INFO - log_system_info:241 -    Python: 3.13.2
+2025-08-22 16:16:37 - utils.logging_config - INFO - log_system_info:242 -    Architecture: 64bit
+2025-08-22 16:16:37 - utils.logging_config - INFO - log_system_info:243 -    Processor: Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+2025-08-22 16:16:37 - utils.logging_config - INFO - log_system_info:247 -    Total Memory: 23.8GB
+2025-08-22 16:16:37 - utils.logging_config - INFO - log_system_info:248 -    Available Memory: 10.0GB
+2025-08-22 16:16:37 - utils.logging_config - INFO - log_system_info:249 -    Memory Usage: 57.9%
+2025-08-22 16:16:37 - utils.logging_config - INFO - log_system_info:252 -    CPU Cores: 12
+2025-08-22 16:16:38 - utils.logging_config - INFO - log_system_info:253 -    CPU Usage: 12.6%
+2025-08-22 16:16:38 - simulator.drone_simulator - INFO - run:113 - 🎯 Simulator ready - GUI started
+2025-08-22 16:16:45 - simulator.drone_simulator - INFO - load_qgc_files:398 - 📁 Loading QGC files
+2025-08-22 16:16:58 - simulator.drone_simulator - INFO - load_qgc_files:398 - 📁 Loading QGC files
+2025-08-22 16:17:01 - simulator.drone_simulator - INFO - _load_mission_files:423 - 📂 Loading 4 QGC files
+2025-08-22 16:17:01 - simulator.file_parser - INFO - parse_file:50 - Parsing QGC file: C:\Users\User\Documents\waypoint\drone_1_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - INFO - parse_file:82 - Successfully parsed 65 waypoints from C:\Users\User\Documents\waypoint\drone_1_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - WARNING - _validate_waypoint_sequence:169 - No HOME waypoint found in mission
+2025-08-22 16:17:01 - core.coordinate_system - INFO - set_origin:40 - Coordinate origin set to: 23.70133500, 120.42328600
+2025-08-22 16:17:01 - core.coordinate_system - INFO - set_origin:41 - Longitude conversion factor: 101739.15 m/degree
+2025-08-22 16:17:01 - simulator.drone_simulator - INFO - _load_mission_files:469 - ✅ Loaded Drone_1: 65 waypoints from C:/Users/User/Documents/waypoint/drone_1_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - INFO - parse_file:50 - Parsing QGC file: C:\Users\User\Documents\waypoint\drone_2_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - INFO - parse_file:82 - Successfully parsed 75 waypoints from C:\Users\User\Documents\waypoint\drone_2_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - WARNING - _validate_waypoint_sequence:169 - No HOME waypoint found in mission
+2025-08-22 16:17:01 - simulator.drone_simulator - INFO - _load_mission_files:469 - ✅ Loaded Drone_2: 75 waypoints from C:/Users/User/Documents/waypoint/drone_2_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - INFO - parse_file:50 - Parsing QGC file: C:\Users\User\Documents\waypoint\drone_3_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - INFO - parse_file:82 - Successfully parsed 83 waypoints from C:\Users\User\Documents\waypoint\drone_3_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - WARNING - _validate_waypoint_sequence:169 - No HOME waypoint found in mission
+2025-08-22 16:17:01 - simulator.drone_simulator - INFO - _load_mission_files:469 - ✅ Loaded Drone_3: 83 waypoints from C:/Users/User/Documents/waypoint/drone_3_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - INFO - parse_file:50 - Parsing QGC file: C:\Users\User\Documents\waypoint\drone_4_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - INFO - parse_file:82 - Successfully parsed 83 waypoints from C:\Users\User\Documents\waypoint\drone_4_smart.waypoints
+2025-08-22 16:17:01 - simulator.file_parser - WARNING - _validate_waypoint_sequence:169 - No HOME waypoint found in mission
+2025-08-22 16:17:01 - simulator.drone_simulator - INFO - _load_mission_files:469 - ✅ Loaded Drone_4: 83 waypoints from C:/Users/User/Documents/waypoint/drone_4_smart.waypoints
+2025-08-22 16:17:04 - gui.main_window - INFO - show_info:551 - Info dialog: Load Success - Successfully loaded 4 drone missions
+File type: QGC
+Ready for simulation
+2025-08-22 16:17:16 - gui.main_window - INFO - show_info:551 - Info dialog: Export Info - No modified mission files to export
+2025-08-22 16:17:18 - simulator.drone_simulator - INFO - reset_simulation:517 - ↻ Resetting simulation
+2025-08-22 16:17:18 - simulator.drone_simulator - INFO - stop_simulation:510 - ⏹️ Stopping simulation
+2025-08-22 16:17:18 - core.collision_logger - INFO - clear_events:132 - Cleared 0 collision events
+2025-08-22 16:17:18 - simulator.drone_simulator - INFO - reset_simulation:535 - ✅ Simulation reset completed
+2025-08-22 16:17:18 - simulator.drone_simulator - INFO - toggle_play:500 - ▶️ Starting simulation
+2025-08-22 16:17:21 - simulator.drone_simulator - INFO - stop_simulation:510 - ⏹️ Stopping simulation
+2025-08-22 16:17:21 - simulator.drone_simulator - INFO - toggle_play:500 - ▶️ Starting simulation
+2025-08-22 16:17:22 - simulator.drone_simulator - INFO - stop_simulation:510 - ⏹️ Stopping simulation
+2025-08-22 16:18:05 - gui.main_window - INFO - show_info:551 - Info dialog: Export Info - No collision events to export
+2025-08-22 16:18:06 - simulator.drone_simulator - INFO - reset_simulation:517 - ↻ Resetting simulation
+2025-08-22 16:18:06 - simulator.drone_simulator - INFO - stop_simulation:510 - ⏹️ Stopping simulation
+2025-08-22 16:18:06 - core.collision_logger - INFO - clear_events:132 - Cleared 0 collision events
+2025-08-22 16:18:06 - simulator.drone_simulator - INFO - reset_simulation:535 - ✅ Simulation reset completed
+2025-08-22 16:18:07 - simulator.drone_simulator - INFO - toggle_play:500 - ▶️ Starting simulation
+2025-08-22 16:18:10 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 3.1s)
+2025-08-22 16:18:10 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 3.1s)
+2025-08-22 16:18:10 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 3.4s)
+2025-08-22 16:18:10 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 3.4s)
+2025-08-22 16:18:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 3.6s)
+2025-08-22 16:18:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 3.6s)
+2025-08-22 16:18:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 3.8s)
+2025-08-22 16:18:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 3.8s)
+2025-08-22 16:18:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 4.0s)
+2025-08-22 16:18:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 4.0s)
+2025-08-22 16:18:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 4.2s)
+2025-08-22 16:18:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 4.2s)
+2025-08-22 16:18:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 4.4s)
+2025-08-22 16:18:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 4.4s)
+2025-08-22 16:18:12 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 4.6s)
+2025-08-22 16:18:12 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 4.6s)
+2025-08-22 16:18:12 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 4.8s)
+2025-08-22 16:18:12 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 4.8s)
+2025-08-22 16:18:12 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 5.1s)
+2025-08-22 16:18:12 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 5.1s)
+2025-08-22 16:18:12 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 5.3s)
+2025-08-22 16:18:12 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 5.3s)
+2025-08-22 16:18:13 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 5.5s)
+2025-08-22 16:18:13 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 5.5s)
+2025-08-22 16:18:13 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 5.7s)
+2025-08-22 16:18:13 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 5.7s)
+2025-08-22 16:18:13 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 5.9s)
+2025-08-22 16:18:13 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 5.9s)
+2025-08-22 16:18:13 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 6.1s)
+2025-08-22 16:18:13 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 6.1s)
+2025-08-22 16:18:13 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 6.3s)
+2025-08-22 16:18:13 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 6.3s)
+2025-08-22 16:18:14 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 6.6s)
+2025-08-22 16:18:14 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 6.6s)
+2025-08-22 16:18:14 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 6.8s)
+2025-08-22 16:18:14 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 6.8s)
+2025-08-22 16:18:14 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 7.0s)
+2025-08-22 16:18:14 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 7.0s)
+2025-08-22 16:18:14 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 7.2s)
+2025-08-22 16:18:14 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 7.2s)
+2025-08-22 16:18:14 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 7.4s)
+2025-08-22 16:18:14 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 7.4s)
+2025-08-22 16:18:15 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 7.6s)
+2025-08-22 16:18:15 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 7.6s)
+2025-08-22 16:18:15 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 7.8s)
+2025-08-22 16:18:15 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 7.8s)
+2025-08-22 16:18:15 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 8.0s)
+2025-08-22 16:18:15 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 8.0s)
+2025-08-22 16:18:15 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 8.3s)
+2025-08-22 16:18:15 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 8.3s)
+2025-08-22 16:18:16 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 8.5s)
+2025-08-22 16:18:16 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 8.5s)
+2025-08-22 16:18:16 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 8.8s)
+2025-08-22 16:18:16 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 8.8s)
+2025-08-22 16:18:16 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 8.9s)
+2025-08-22 16:18:16 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.44m (sim time: 8.9s)
+2025-08-22 16:18:16 - core.collision_logger - WARNING - log_collision:74 - Collision warning: Drone_1 vs Drone_2 at 4.50m (sim time: 9.3s)
+2025-08-22 16:18:24 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 2.56m (sim time: 17.3s)
+2025-08-22 16:18:25 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 17.5s)
+2025-08-22 16:18:25 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 17.7s)
+2025-08-22 16:18:25 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 18.0s)
+2025-08-22 16:18:25 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 1.45m (sim time: 18.2s)
+2025-08-22 16:18:33 - core.collision_logger - WARNING - log_collision:74 - Collision warning: Drone_3 vs Drone_4 at 4.00m (sim time: 26.9s)
+2025-08-22 16:18:35 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 35.7s)
+2025-08-22 16:18:38 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 2.92m (sim time: 53.5s)
+2025-08-22 16:18:39 - core.collision_logger - WARNING - log_collision:74 - Collision warning: Drone_2 vs Drone_3 at 3.85m (sim time: 54.6s)
+2025-08-22 16:18:42 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 72.0s)
+2025-08-22 16:18:46 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.92m (sim time: 90.7s)
+2025-08-22 16:18:49 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 2.21m (sim time: 108.0s)
+2025-08-22 16:18:53 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 126.6s)
+2025-08-22 16:18:57 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.82m (sim time: 144.4s)
+2025-08-22 16:19:00 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 163.1s)
+2025-08-22 16:19:04 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 180.8s)
+2025-08-22 16:19:08 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.27m (sim time: 199.5s)
+2025-08-22 16:19:11 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 217.3s)
+2025-08-22 16:19:15 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.92m (sim time: 235.8s)
+2025-08-22 16:19:18 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 253.3s)
+2025-08-22 16:19:22 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 272.0s)
+2025-08-22 16:19:26 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_2 vs Drone_3 at 0.22m (sim time: 290.1s)
+2025-08-22 16:19:29 - core.collision_logger - WARNING - log_collision:74 - Collision warning: Drone_2 vs Drone_3 at 3.09m (sim time: 308.3s)
+2025-08-22 16:19:38 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 1.04m (sim time: 353.7s)
+2025-08-22 16:19:39 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 354.2s)
+2025-08-22 16:19:39 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 355.5s)
+2025-08-22 16:19:39 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 356.5s)
+2025-08-22 16:19:39 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 357.6s)
+2025-08-22 16:19:39 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 358.6s)
+2025-08-22 16:19:40 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 359.7s)
+2025-08-22 16:19:40 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 360.6s)
+2025-08-22 16:19:40 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 361.7s)
+2025-08-22 16:19:40 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 362.8s)
+2025-08-22 16:19:41 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 364.1s)
+2025-08-22 16:19:41 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 365.2s)
+2025-08-22 16:19:41 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 366.4s)
+2025-08-22 16:19:41 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 367.5s)
+2025-08-22 16:19:41 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 368.7s)
+2025-08-22 16:19:42 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 369.7s)
+2025-08-22 16:19:42 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 370.8s)
+2025-08-22 16:19:42 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 371.8s)
+2025-08-22 16:19:42 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 372.9s)
+2025-08-22 16:19:43 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 373.8s)
+2025-08-22 16:19:43 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 375.1s)
+2025-08-22 16:19:43 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 376.1s)
+2025-08-22 16:19:43 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 377.2s)
+2025-08-22 16:19:43 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 378.2s)
+2025-08-22 16:19:44 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 379.4s)
+2025-08-22 16:19:44 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 380.3s)
+2025-08-22 16:19:44 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 381.4s)
+2025-08-22 16:19:44 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 382.3s)
+2025-08-22 16:19:44 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 383.4s)
+2025-08-22 16:19:45 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 384.4s)
+2025-08-22 16:19:45 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 385.5s)
+2025-08-22 16:19:45 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 386.5s)
+2025-08-22 16:19:45 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 387.6s)
+2025-08-22 16:19:45 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 388.6s)
+2025-08-22 16:19:46 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 389.7s)
+2025-08-22 16:19:46 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 390.6s)
+2025-08-22 16:19:46 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_1 vs Drone_2 at 0.22m (sim time: 391.8s)
+2025-08-22 16:19:46 - core.collision_logger - ERROR - log_collision:71 - CRITICAL COLLISION: Drone_3 vs Drone_4 at 2.42m (sim time: 391.8s)
+2025-08-22 16:19:46 - simulator.drone_simulator - INFO - toggle_play:504 - ⏸️ Pausing simulation
+2025-08-22 16:19:52 - gui.main_window - INFO - show_info:551 - Info dialog: Export Info - No modified mission files to export
+2025-08-22 16:20:10 - gui.main_window - INFO - _on_window_close:330 - Window close requested
+2025-08-22 16:20:10 - simulator.drone_simulator - INFO - on_closing:883 - 🚪 Application closing
+2025-08-22 16:20:10 - simulator.drone_simulator - INFO - stop_simulation:510 - ⏹️ Stopping simulation
+2025-08-22 16:20:13 - gui.main_window - INFO - ask_yes_no:556 - Yes/No dialog: Export Collision Log - Result: True
+2025-08-22 16:20:13 - core.collision_logger - ERROR - export_collision_log:187 - Failed to export collision log: open() argument 'encoding' must be str or None, not bool
+2025-08-22 16:20:13 - simulator.drone_simulator - INFO - _cleanup:910 - 🧹 Cleaning up resources
+2025-08-22 16:20:13 - simulator.drone_simulator - INFO - _cleanup:921 - ✅ Cleanup completed
+2025-08-22 16:20:13 - gui.main_window - INFO - destroy:566 - Destroying main window
+2025-08-22 16:20:13 - simulator.drone_simulator - INFO - _cleanup:910 - 🧹 Cleaning up resources
+2025-08-22 16:20:13 - simulator.drone_simulator - INFO - _cleanup:921 - ✅ Cleanup completed

@@ -1,0 +1,84 @@
+2025-08-27 09:40:34 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 09:40:34 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 09:40:34 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 09:40:34 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 09:40:33 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 09:40:34 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 09:40:34 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 09:40:34 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 09:40:34 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 09:40:34 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 09:40:34 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 09:40:34 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 09:40:53 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 09:40:53 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 09:40:53 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 09:40:53 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 09:40:52 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 09:40:53 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 09:40:53 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 09:40:53 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 09:40:53 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 09:40:53 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 09:40:53 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 09:40:53 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 09:41:13 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 09:41:13 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 09:41:13 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 09:41:13 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 09:41:12 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 09:41:13 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 09:41:13 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 09:41:13 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 09:41:13 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 09:41:13 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 09:41:13 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 09:41:13 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 09:42:38 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 09:42:38 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 09:42:38 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 09:42:38 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 09:42:36 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 09:42:38 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 09:42:38 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 09:42:38 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 09:42:38 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 09:42:38 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 09:42:38 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 09:42:38 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 09:42:52 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 09:42:52 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 09:42:52 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 09:42:52 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 09:42:51 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 09:42:52 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 09:42:52 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 09:42:52 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 09:42:52 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 09:42:52 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 09:42:52 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 09:42:52 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 09:43:07 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 09:43:07 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 09:43:07 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 09:43:07 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 09:43:06 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 09:43:07 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 09:43:07 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 09:43:07 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 09:43:07 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 09:43:07 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 09:43:07 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 09:43:07 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 09:44:43 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 09:44:43 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 09:44:43 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 09:44:43 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 09:44:41 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 09:44:43 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 09:44:43 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 09:44:43 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 09:44:43 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 09:44:43 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 09:44:43 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 09:44:43 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================

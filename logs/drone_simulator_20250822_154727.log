@@ -1,0 +1,11 @@
+2025-08-22 15:47:27 - root - INFO - setup_logging:90 - ============================================================
+2025-08-22 15:47:27 - root - INFO - setup_logging:91 - 🚁 Advanced Drone Swarm Simulator v5.1 - Logging Started
+2025-08-22 15:47:27 - root - INFO - setup_logging:92 - ============================================================
+2025-08-22 15:47:27 - root - INFO - setup_logging:93 - 📝 Log Level: INFO
+2025-08-22 15:47:27 - root - INFO - setup_logging:94 - 📁 Log Directory: C:\Users\User\Documents\drone_simulator\logs
+2025-08-22 15:47:27 - root - INFO - setup_logging:95 - 💾 Max File Size: 10.0MB
+2025-08-22 15:47:27 - root - INFO - setup_logging:96 - 🔄 Backup Count: 5
+2025-08-22 15:47:27 - root - INFO - main:21 - 🚁 Advanced Drone Swarm Simulator v5.1 Starting
+2025-08-22 15:47:27 - root - INFO - main:22 - 🆕 New Features: Collision Logging, 6m Spacing, English UI, Mouse Zoom
+2025-08-22 15:47:27 - root - INFO - main:38 - ✅ Environment setup complete
+2025-08-22 15:47:27 - root - INFO - main:39 - 🎯 Version Features: Collision Detection, Mouse Zoom, 2x2 6m Takeoff, LOITER Avoidance, Collision Logging

@@ -1,0 +1,52 @@
+2025-08-22 16:41:58 - root - INFO - setup_logging:90 - ============================================================
+2025-08-22 16:41:58 - root - INFO - setup_logging:91 - 🚁 Advanced Drone Swarm Simulator v5.1 - Logging Started
+2025-08-22 16:41:58 - root - INFO - setup_logging:92 - ============================================================
+2025-08-22 16:41:58 - root - INFO - setup_logging:93 - 📝 Log Level: INFO
+2025-08-22 16:41:58 - root - INFO - setup_logging:94 - 📁 Log Directory: C:\Users\User\Documents\drone_simulator\logs
+2025-08-22 16:41:58 - root - INFO - setup_logging:95 - 💾 Max File Size: 10.0MB
+2025-08-22 16:41:58 - root - INFO - setup_logging:96 - 🔄 Backup Count: 5
+2025-08-22 16:41:58 - root - INFO - main:21 - 🚁 Advanced Drone Swarm Simulator v5.1 Starting
+2025-08-22 16:41:58 - root - INFO - main:22 - 🆕 New Features: Collision Logging, 6m Spacing, English UI, Mouse Zoom
+2025-08-22 16:41:58 - root - INFO - main:38 - ✅ Environment setup complete
+2025-08-22 16:41:58 - root - INFO - main:39 - 🎯 Version Features: Collision Detection, Mouse Zoom, 2x2 6m Takeoff, LOITER Avoidance, Collision Logging
+2025-08-22 16:41:59 - simulator - INFO - _initialize_package:282 - 📦 Simulator package v5.1.0 initialized
+2025-08-22 16:41:59 - root - WARNING - <module>:252 - Package import warning: cannot import name 'setup_logging' from 'utils' (c:\Users\User\Documents\drone_simulator\utils\__init__.py)
+2025-08-22 16:41:59 - simulator.drone_simulator - INFO - __init__:55 - 🚁 Initializing Advanced Drone Simulator v5.1
+2025-08-22 16:41:59 - core.collision_avoidance - INFO - __init__:29 - Collision avoidance system initialized with safety distance: 5.0m
+2025-08-22 16:41:59 - core.flight_manager - INFO - __init__:25 - TakeoffManager initialized with 6.0m spacing
+2025-08-22 16:41:59 - core.collision_logger - INFO - initialize_log_file:44 - Collision logger initialized: drone_simulator_collisions_20250822_164159.json
+2025-08-22 16:41:59 - simulator.drone_simulator - INFO - __init__:90 - ✅ Advanced Drone Simulator initialized successfully
+2025-08-22 16:41:59 - simulator.drone_simulator - INFO - run:96 - 🚀 Starting Advanced Drone Simulator
+2025-08-22 16:41:59 - simulator.drone_simulator - INFO - _setup_gui:128 - 🖥️ Setting up GUI components
+2025-08-22 16:41:59 - gui.main_window - INFO - create_window:33 - Creating main window
+2025-08-22 16:41:59 - gui.main_window - INFO - create_window:57 - Main window created successfully
+2025-08-22 16:41:59 - gui.control_panel - INFO - __init__:31 - Control panel initialized
+2025-08-22 16:41:59 - gui.control_panel - INFO - create_panel:62 - Creating control panel
+2025-08-22 16:42:00 - gui.control_panel - INFO - create_panel:78 - Control panel created successfully
+2025-08-22 16:42:00 - gui.plot_manager - INFO - __init__:49 - 3D Plot Manager initialized
+2025-08-22 16:42:00 - gui.plot_manager - INFO - setup_plot:63 - Setting up 3D plot
+2025-08-22 16:42:00 - gui.plot_manager - INFO - setup_plot:103 - 3D plot setup completed
+2025-08-22 16:42:00 - gui.main_window - INFO - create_menu:91 - Creating menu bar
+2025-08-22 16:42:00 - gui.main_window - INFO - create_menu:108 - Menu bar created successfully
+2025-08-22 16:42:00 - gui.main_window - INFO - bind_shortcuts:262 - Binding keyboard shortcuts
+2025-08-22 16:42:00 - simulator.drone_simulator - INFO - _setup_gui:150 - ✅ GUI setup completed
+2025-08-22 16:42:00 - simulator.drone_simulator - INFO - _register_callbacks:154 - 🔗 Registering callbacks
+2025-08-22 16:42:00 - utils.logging_config - INFO - log_system_info:239 - 🖥️  System Information:
+2025-08-22 16:42:00 - utils.logging_config - INFO - log_system_info:240 -    Platform: Windows 11
+2025-08-22 16:42:00 - utils.logging_config - INFO - log_system_info:241 -    Python: 3.13.2
+2025-08-22 16:42:00 - utils.logging_config - INFO - log_system_info:242 -    Architecture: 64bit
+2025-08-22 16:42:00 - utils.logging_config - INFO - log_system_info:243 -    Processor: Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+2025-08-22 16:42:00 - utils.logging_config - INFO - log_system_info:247 -    Total Memory: 23.8GB
+2025-08-22 16:42:00 - utils.logging_config - INFO - log_system_info:248 -    Available Memory: 10.8GB
+2025-08-22 16:42:00 - utils.logging_config - INFO - log_system_info:249 -    Memory Usage: 54.8%
+2025-08-22 16:42:00 - utils.logging_config - INFO - log_system_info:252 -    CPU Cores: 12
+2025-08-22 16:42:01 - utils.logging_config - INFO - log_system_info:253 -    CPU Usage: 3.5%
+2025-08-22 16:42:01 - simulator.drone_simulator - INFO - run:113 - 🎯 Simulator ready - GUI started
+2025-08-22 16:42:03 - gui.main_window - INFO - _on_window_close:330 - Window close requested
+2025-08-22 16:42:03 - simulator.drone_simulator - INFO - on_closing:883 - 🚪 Application closing
+2025-08-22 16:42:03 - simulator.drone_simulator - INFO - stop_simulation:510 - ⏹️ Stopping simulation
+2025-08-22 16:42:03 - simulator.drone_simulator - INFO - _cleanup:910 - 🧹 Cleaning up resources
+2025-08-22 16:42:03 - simulator.drone_simulator - INFO - _cleanup:921 - ✅ Cleanup completed
+2025-08-22 16:42:03 - gui.main_window - INFO - destroy:566 - Destroying main window
+2025-08-22 16:42:04 - simulator.drone_simulator - INFO - _cleanup:910 - 🧹 Cleaning up resources
+2025-08-22 16:42:04 - simulator.drone_simulator - INFO - _cleanup:921 - ✅ Cleanup completed

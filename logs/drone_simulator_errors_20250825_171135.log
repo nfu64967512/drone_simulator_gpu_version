@@ -1,0 +1,1 @@
+2025-08-25 19:27:43 - core.collision_logger - ERROR - export_collision_log:187 - Failed to export collision log: open() argument 'encoding' must be str or None, not bool
