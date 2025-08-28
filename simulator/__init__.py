@@ -13,6 +13,7 @@ This package provides:
 
 import logging
 from typing import Dict, List, Optional
+from wsgiref.validate import validator
 
 # Package metadata
 __version__ = "5.1.0"
@@ -21,7 +22,7 @@ __email__ = "contact@dronelab.example.com"
 __description__ = "Advanced drone swarm simulation with collision avoidance"
 
 # Import file parsers (safe imports that don't cause circular dependencies)
-from .file_parser import (
+from simulator.file_parser import (
     QGCFileParser,
     CSVFileParser, 
     FileParserFactory
@@ -393,11 +394,11 @@ Example usage:
     
     # Validate file
     validation = validate_mission_file('mission.csv')
-    print(f"Valid: {validation['valid']}")
+    print(f"Valid: {validator['valid']}")
     
     # Get supported formats
     formats = get_supported_file_types()
-    print(f"Supported: {list(formats.keys())}")
+    print(f"Supported: {list(format.keys())}")
 
 Supported File Formats:
 {list_supported_formats()}

@@ -4,7 +4,7 @@
 """
 
 # 導入所有配置類別和枚舉
-from .settings import (
+from config.settings import (
     # 計算後端
     ComputeBackend,
     
@@ -25,12 +25,16 @@ from .settings import (
     DroneConfig,
     WeatherConfig,
     NetworkConfig,
+    SimulatorConfig,
+    UILabels,
     
     # 設定實例
     settings,
     drone_config,
     weather_config,
     network_config,
+    simulator_config,
+    ui_labels,
     
     # 工具函數
     get_compute_backend_info,
@@ -107,12 +111,16 @@ __all__ = [
     'DroneConfig',
     'WeatherConfig', 
     'NetworkConfig',
+    'SimulatorConfig',
+    'UILabels',
     
     # 設定實例
     'settings',
     'drone_config',
     'weather_config',
     'network_config',
+    'simulator_config',
+    'ui_labels',
     
     # 向後相容別名
     'DEFAULT_SETTINGS',

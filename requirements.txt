@@ -12,10 +12,9 @@ psutil>=5.8.0
 # Ubuntu/Debian: sudo apt-get install python3-tk
 
 # ===== GPU加速依賴 =====
-# CUDA 11.x 版本 (根據您的CUDA版本選擇)
-cupy-cuda11x>=10.0.0; sys_platform != "darwin"
+
 # CUDA 12.x 版本 (如果使用CUDA 12)
-# cupy-cuda12x>=12.0.0; sys_platform != "darwin"
+ cupy-cuda12x>=12.0.0; sys_platform != "darwin"
 
 # macOS 不支援CUDA，使用CPU版本
 # cupy 在macOS上不可用，將自動回退到CPU模式

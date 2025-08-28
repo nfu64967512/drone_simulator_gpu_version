@@ -36,8 +36,8 @@ class BackendSelector:
         """顯示後端選擇對話框"""
         self.root = tk.Tk()
         self.root.title("無人機模擬器 - 計算後端選擇")
-        self.root.geometry("600x500")  # 增大視窗尺寸
-        self.root.resizable(True, True)  # 允許調整大小
+        self.root.geometry("500x400")
+        self.root.resizable(False, False)
         
         # 設置圖標和樣式
         self._setup_ui_style()
@@ -49,7 +49,7 @@ class BackendSelector:
         # 標題
         title_label = ttk.Label(
             main_frame, 
-            text="[DRONE] 無人機群模擬器",
+            text="🚁 無人機群模擬器",
             font=("Arial", 16, "bold")
         )
         title_label.grid(row=0, column=0, columnspan=2, pady=(0, 20))
@@ -109,7 +109,7 @@ class BackendSelector:
         # GPU選項
         self.gpu_radio = ttk.Radiobutton(
             backend_frame,
-            text="[START] GPU加速",
+            text="🚀 GPU加速",
             variable=self.backend_var,
             value="gpu"
         )
@@ -144,7 +144,7 @@ class BackendSelector:
         # GPU資訊文本框
         self.gpu_info_text = tk.Text(
             info_frame, 
-            height=6, 
+            height=60, 
             width=60, 
             font=('Courier', 9),
             bg='#f0f0f0',
@@ -191,7 +191,7 @@ class BackendSelector:
         # 啟動按鈕
         start_button = ttk.Button(
             button_frame,
-            text="[START] 啟動模擬器",
+            text="🚀 啟動模擬器",
             command=self._on_start_clicked,
             style='Title.TLabel'
         )
@@ -200,7 +200,7 @@ class BackendSelector:
         # 測試按鈕
         test_button = ttk.Button(
             button_frame,
-            text="[TEST] 性能測試",
+            text="🧪 性能測試",
             command=self._on_test_clicked
         )
         test_button.pack(side=tk.LEFT, padx=(0, 10))
@@ -208,7 +208,7 @@ class BackendSelector:
         # 退出按鈕
         exit_button = ttk.Button(
             button_frame,
-            text="[ERROR] 退出",
+            text="❌ 退出",
             command=self._on_exit_clicked
         )
         exit_button.pack(side=tk.LEFT)
@@ -224,13 +224,13 @@ class BackendSelector:
             cpu_freq = psutil.cpu_freq()
             memory = psutil.virtual_memory()
             
-            info_lines.append(f"[OK] CPU: {cpu_count} 核心")
+            info_lines.append(f"✅ CPU: {cpu_count} 核心")
             if cpu_freq:
                 info_lines.append(f"   頻率: {cpu_freq.current:.0f} MHz")
             info_lines.append(f"   記憶體: {memory.total / (1024**3):.1f} GB")
             
         except Exception as e:
-            info_lines.append(f"[WARN] CPU資訊獲取失敗: {e}")
+            info_lines.append(f"⚠️ CPU資訊獲取失敗: {e}")
         
         # 檢測GPU
         gpu_available = False
@@ -244,7 +244,7 @@ class BackendSelector:
             
             # 獲取GPU資訊
             device_count = cp.cuda.runtime.getDeviceCount()
-            info_lines.append(f"\n[OK] GPU (CUDA): {device_count} 設備可用")
+            info_lines.append(f"\n✅ GPU (CUDA): {device_count} 設備可用")
             
             for i in range(device_count):
                 props = cp.cuda.runtime.getDeviceProperties(i)
@@ -262,12 +262,12 @@ class BackendSelector:
             self.gpu_info_label.configure(text="    GPU可用，支援CUDA加速")
             
         except ImportError:
-            info_lines.append("\n[ERROR] GPU (CUDA): CuPy未安裝")
+            info_lines.append("\n❌ GPU (CUDA): CuPy未安裝")
             self.gpu_info_label.configure(text="    需要安裝CuPy以啟用GPU加速")
             self.gpu_radio.configure(state='disabled')
             
         except Exception as e:
-            info_lines.append(f"\n[ERROR] GPU檢測失敗: {e}")
+            info_lines.append(f"\n❌ GPU檢測失敗: {e}")
             self.gpu_info_label.configure(text="    GPU不可用或CUDA未正確安裝")
             self.gpu_radio.configure(state='disabled')
         
@@ -317,7 +317,7 @@ class BackendSelector:
 
 def run_performance_test():
     """運行性能測試"""
-    print("[TEST] 啟動性能測試...")
+    print("🧪 啟動性能測試...")
     
     # 導入測試工具
     try:
@@ -325,7 +325,7 @@ def run_performance_test():
         import numpy as np
         import time
         
-        print(f"計算後端: {compute_manager.backend.value.value.upper()}")
+        print(f"計算後端: {compute_manager.backend.value.upper()}")
         print("=" * 50)
         
         # 測試1: 基本陣列運算
@@ -377,10 +377,10 @@ def run_performance_test():
         print(f"  使用記憶體: {memory_info['used_bytes']/1024**2:.1f} MB")
         print(f"  總記憶體: {memory_info['total_bytes']/1024**2:.1f} MB")
         
-        print("\n[OK] 性能測試完成")
+        print("\n✅ 性能測試完成")
         
     except Exception as e:
-        print(f"[ERROR] 性能測試失敗: {e}")
+        print(f"❌ 性能測試失敗: {e}")
         import traceback
         traceback.print_exc()
 
@@ -405,7 +405,7 @@ def main():
     # 設置日誌級別
     logging.getLogger().setLevel(getattr(logging, args.log_level))
     
-    print("[DRONE] 無人機群模擬器")
+    print("🚁 無人機群模擬器")
     print("=" * 50)
     
     # 直接運行測試
@@ -430,7 +430,7 @@ def main():
             result = selector.show_selection_dialog()
             
             if not result or result.get('action') == 'exit':
-                print("[EXIT] 使用者取消，程式退出")
+                print("👋 使用者取消，程式退出")
                 return
             
             action = result.get('action')
@@ -450,13 +450,13 @@ def main():
     if action == 'start':
         # 顯示後端資訊
         backend_info = get_compute_backend_info()
-        print(f"[OK] 計算後端: {backend_info['backend'].value.value.upper()}")
+        print(f"✅ 計算後端: {backend_info['backend'].upper()}")
         if backend_info['device_id'] is not None:
-            print(f"[GPU] GPU設備ID: {backend_info['device_id']}")
+            print(f"📱 GPU設備ID: {backend_info['device_id']}")
         
         # 啟動主程序
         try:
-            print("[START] 啟動主程序...")
+            print("🚀 啟動主程序...")
             
             # 導入並啟動主GUI
             from gui.main_window import DroneSimulatorApp
@@ -470,7 +470,7 @@ def main():
             
         except ImportError as e:
             logger.error(f"導入主程序失敗: {e}")
-            print("[ERROR] 請確保所有依賴項目都已安裝")
+            print("❌ 請確保所有依賴項目都已安裝")
             print("安裝指令: pip install -r requirements.txt")
             
         except Exception as e:

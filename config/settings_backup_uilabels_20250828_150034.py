@@ -147,38 +147,6 @@ class SimulatorConfig:
     collision_detection: bool = True
     real_time_mode: bool = True
 
-
-@dataclass
-class UILabels:
-    """用戶界面標籤配置（向後相容）"""
-    # 主窗口標籤
-    window_title: str = "無人機群模擬器"
-    menu_file: str = "檔案"
-    menu_edit: str = "編輯"
-    menu_view: str = "檢視"
-    menu_help: str = "說明"
-    
-    # 按鈕標籤
-    btn_start: str = "開始"
-    btn_stop: str = "停止"
-    btn_pause: str = "暫停"
-    btn_reset: str = "重置"
-    btn_load: str = "載入"
-    btn_save: str = "儲存"
-    
-    # 狀態標籤
-    status_ready: str = "就緒"
-    status_running: str = "運行中"
-    status_paused: str = "已暫停"
-    status_stopped: str = "已停止"
-    
-    # 工具提示
-    tooltip_start: str = "開始模擬"
-    tooltip_stop: str = "停止模擬"
-    tooltip_pause: str = "暫停模擬"
-    tooltip_reset: str = "重置模擬"
-
-
 # 全域設定實例
 settings = SimulationSettings()
 
@@ -187,7 +155,6 @@ drone_config = DroneConfig()
 weather_config = WeatherConfig()  
 network_config = NetworkConfig()
 simulator_config = SimulatorConfig()
-ui_labels = UILabels()
 
 def get_compute_backend_info():
     """獲取計算後端資訊"""

@@ -38,10 +38,10 @@ class ComputeManager:
             self._backend = ComputeBackend.GPU if self._gpu_available else ComputeBackend.CPU
         elif requested_backend == ComputeBackend.GPU:
             if not self._gpu_available and settings.gpu.enable_fallback:
-                logger.warning("[WARN] GPU不可用，回退到CPU模式")
+                logger.warning("⚠️ GPU不可用，回退到CPU模式")
                 self._backend = ComputeBackend.CPU
             elif not self._gpu_available:
-                raise RuntimeError("[ERROR] GPU不可用且已禁用回退模式")
+                raise RuntimeError("❌ GPU不可用且已禁用回退模式")
             else:
                 self._backend = ComputeBackend.GPU
         else:
@@ -65,13 +65,13 @@ class ComputeManager:
             cp.cuda.Device().synchronize()
             
             self._gpu_available = True
-            logger.info("[OK] GPU (CUDA) 檢測成功")
+            logger.info("✅ GPU (CUDA) 檢測成功")
             
         except ImportError:
-            logger.info("[INFO] CuPy未安裝，使用CPU模式")
+            logger.info("📦 CuPy未安裝，使用CPU模式")
             self._gpu_available = False
         except Exception as e:
-            logger.warning(f"[WARN] GPU檢測失敗: {e}")
+            logger.warning(f"⚠️ GPU檢測失敗: {e}")
             self._gpu_available = False
     
     def _setup_array_module(self):
@@ -90,11 +90,11 @@ class ComputeManager:
         if self._backend == ComputeBackend.GPU:
             gpu_info = self._cupy.cuda.runtime.getDeviceProperties(settings.gpu.device_id)
             memory_info = self._cupy.cuda.MemoryPool().get_limit()
-            logger.info(f"[GPU] GPU後端啟用")
-            logger.info(f"[DEVICE] 設備: {gpu_info['name'].decode()}")
-            logger.info(f"[MEMORY] 記憶體限制: {memory_info / 1024**3:.1f} GB")
+            logger.info(f"🚀 GPU後端啟用")
+            logger.info(f"📱 設備: {gpu_info['name'].decode()}")
+            logger.info(f"💾 記憶體限制: {memory_info / 1024**3:.1f} GB")
         else:
-            logger.info("[CPU] CPU後端啟用")
+            logger.info("🖥️ CPU後端啟用")
     
     @property
     def backend(self) -> ComputeBackend:
@@ -190,7 +190,7 @@ def gpu_accelerated(fallback_cpu: bool = True):
                 return result
             except Exception as e:
                 if is_gpu_enabled() and fallback_cpu:
-                    logger.warning(f"[WARN] GPU操作失敗，回退到CPU: {e}")
+                    logger.warning(f"⚠️ GPU操作失敗，回退到CPU: {e}")
                     # 這裡可以實現CPU版本的回退邏輯
                     raise
                 else:
