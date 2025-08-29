@@ -1,0 +1,45 @@
+2025-08-30 03:08:10 - main - INFO - === 系統信息 ===
+2025-08-30 03:08:10 - main - INFO - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-08-30 03:08:10 - main - INFO - 平台: nt
+2025-08-30 03:08:10 - main - INFO - 工作目錄: C:\Users\joy46\OneDrive\文件\drone_simulator_gpu_version-main
+2025-08-30 03:08:10 - main - WARNING - GPU信息獲取失敗: attempted relative import beyond top-level package
+2025-08-30 03:08:10,884 - utils.gpu_utils - ERROR - GPU檢測失敗: 'Name'
+2025-08-30 03:08:10,885 - __main__ - WARNING - GPU不可用，切換到CPU模式
+2025-08-30 03:08:11,407 - gui.control_panel - INFO - 控制面板初始化完成
+2025-08-30 03:08:11,639 - gui.gui_advanced_plotter - INFO - 進階3D繪圖器初始化: GPU=禁用
+2025-08-30 03:08:48 - main - INFO - === 系統信息 ===
+2025-08-30 03:08:48 - main - INFO - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-08-30 03:08:48 - main - INFO - 平台: nt
+2025-08-30 03:08:48 - main - INFO - 工作目錄: C:\Users\joy46\OneDrive\文件\drone_simulator_gpu_version-main
+2025-08-30 03:08:48 - main - WARNING - GPU信息獲取失敗: attempted relative import beyond top-level package
+2025-08-30 03:08:48,290 - config.settings - INFO - 後端配置已更新: gpu
+2025-08-30 03:08:48,379 - utils.gpu_utils - ERROR - GPU檢測失敗: 'Name'
+2025-08-30 03:08:48,379 - __main__ - WARNING - GPU不可用，切換到CPU模式
+2025-08-30 03:08:48,890 - gui.control_panel - INFO - 控制面板初始化完成
+2025-08-30 03:08:49,033 - gui.gui_advanced_plotter - INFO - 進階3D繪圖器初始化: GPU=禁用
+2025-08-30 03:09:00 - main - INFO - === 系統信息 ===
+2025-08-30 03:09:00 - main - INFO - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-08-30 03:09:00 - main - INFO - 平台: nt
+2025-08-30 03:09:00 - main - INFO - 工作目錄: C:\Users\joy46\OneDrive\文件\drone_simulator_gpu_version-main
+2025-08-30 03:09:00 - main - WARNING - GPU信息獲取失敗: attempted relative import beyond top-level package
+2025-08-30 03:09:00,972 - __main__ - INFO - 運行性能測試...
+2025-08-30 03:09:01,055 - utils.gpu_utils - ERROR - GPU檢測失敗: 'Name'
+2025-08-30 03:09:01,058 - utils.gpu_utils - INFO - 開始陣列操作基準測試: size=2000, iterations=50
+2025-08-30 03:09:01,932 - utils.gpu_utils - WARNING - GPU測試失敗: DLL load failed while importing cublas: 找不到指定的模組。
+2025-08-30 03:09:01,932 - utils.gpu_utils - INFO - 陣列操作測試完成: CPU=16.28ms, GPU=infms, 加速=0.00x
+2025-08-30 03:09:01,933 - utils.gpu_utils - INFO - 開始距離矩陣基準測試: points=500, iterations=20
+2025-08-30 03:09:02,194 - utils.gpu_utils - WARNING - GPU距離矩陣測試失敗: CuPy failed to load nvrtc64_120_0.dll: FileNotFoundError: Could not find module 'nvrtc64_120_0.dll' (or one of its dependencies). Try using the full path with constructor syntax.
+2025-08-30 03:09:02,194 - utils.gpu_utils - INFO - 距離矩陣測試完成: CPU=5.78ms, GPU=infms, 加速=0.00x
+2025-08-30 03:09:02,194 - utils.gpu_utils - INFO - 開始記憶體頻寬測試: size=50MB
+2025-08-30 03:09:02,390 - utils.gpu_utils - WARNING - GPU記憶體頻寬測試失敗: CuPy failed to load nvrtc64_120_0.dll: FileNotFoundError: Could not find module 'nvrtc64_120_0.dll' (or one of its dependencies). Try using the full path with constructor syntax.
+2025-08-30 03:09:02,390 - utils.gpu_utils - INFO - 記憶體頻寬測試完成: CPU=11824.7MB/s, GPU=0.0MB/s
+2025-08-30 03:14:10 - main - INFO - === 系統信息 ===
+2025-08-30 03:14:10 - main - INFO - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-08-30 03:14:10 - main - INFO - 平台: nt
+2025-08-30 03:14:10 - main - INFO - 工作目錄: C:\Users\joy46\OneDrive\文件\drone_simulator_gpu_version-main
+2025-08-30 03:14:10 - main - WARNING - GPU信息獲取失敗: attempted relative import beyond top-level package
+2025-08-30 03:14:10,603 - config.settings - INFO - 後端配置已更新: gpu
+2025-08-30 03:14:10,717 - utils.gpu_utils - ERROR - GPU檢測失敗: 'Name'
+2025-08-30 03:14:10,717 - __main__ - WARNING - GPU不可用，切換到CPU模式
+2025-08-30 03:14:11,458 - gui.control_panel - INFO - 控制面板初始化完成
+2025-08-30 03:14:11,653 - gui.gui_advanced_plotter - INFO - 進階3D繪圖器初始化: GPU=禁用

@@ -1,149 +1,153 @@
-# 無人機群模擬器依賴列表
-# GPU加速版本
+# 無人機模擬器GPU版本 - Python依賴套件清單
+# ============================================================
 
-# ===== 基本依賴 =====
-numpy>=1.21.0
-pandas>=1.3.0
-matplotlib>=3.5.0
-psutil>=5.8.0
+# 核心科學計算套件
+numpy>=1.21.0,<2.0.0          # 基礎數值運算
+scipy>=1.7.0                  # 科學計算擴充
+matplotlib>=3.5.0             # 2D/3D繪圖與視覺化
+pandas>=1.3.0                 # 資料處理與分析
 
-# ===== GUI框架 =====
-# tkinter 通常隨Python安裝，但某些Linux發行版需要單獨安裝
-# Ubuntu/Debian: sudo apt-get install python3-tk
+# 圖形介面與視覺化
+tkinter-page                  # GUI界面支援（跨平台相容）
+Pillow>=8.3.0                 # 圖像處理
+opencv-python>=4.5.0          # 電腦視覺（可選）
 
-# ===== GPU加速依賴 =====
+# 3D圖形與OpenGL
+pyopengl>=3.1.0               # OpenGL圖形渲染
+pyopengl-accelerate>=3.1.0    # OpenGL硬體加速
 
-# CUDA 12.x 版本 (如果使用CUDA 12)
- cupy-cuda12x>=12.0.0; sys_platform != "darwin"
+# 多媒體與動畫
+pygame>=2.0.0                 # 遊戲引擎（可選，用於互動式UI）
 
-# macOS 不支援CUDA，使用CPU版本
-# cupy 在macOS上不可用，將自動回退到CPU模式
+# 數學與物理模擬
+sympy>=1.8                    # 符號數學計算
+numba>=0.56.0                 # JIT編譯器，CPU加速
 
-# ===== 高效能計算 =====
-numba>=0.56.0                  # JIT編譯加速
-scipy>=1.7.0                   # 科學計算
-scikit-learn>=1.0.0            # 機器學習算法 (可選)
+# 設定檔與資料格式
+pyyaml>=6.0                   # YAML設定檔解析
+toml>=0.10.0                  # TOML設定檔解析
+json5>=0.9.0                  # 增強JSON支援
+configparser>=5.0.0           # INI設定檔解析
 
-# ===== 並行處理 =====
-joblib>=1.1.0                  # 並行處理工具
-concurrent-futures>=3.1.1; python_version < "3.2"
+# 日誌與除錯
+loguru>=0.6.0                 # 現代化日誌系統
+rich>=12.0.0                  # 美化終端輸出
+tqdm>=4.62.0                  # 進度條顯示
 
-# ===== 資料處理 =====
-h5py>=3.6.0                    # HDF5文件支持 (大數據存儲)
-openpyxl>=3.0.9                # Excel文件支持
-xlrd>=2.0.1                    # Excel讀取
-csv23>=0.3.2                   # 增強CSV處理
+# 平行處理與多執行緒
+joblib>=1.1.0                 # 平行處理工具
+concurrent-futures>=3.1.1     # 非同步執行
+multiprocessing-logging>=0.3.0 # 多程序日誌支援
 
-# ===== 視覺化增強 =====
-plotly>=5.11.0                 # 互動式視覺化 (可選)
-dash>=2.6.0                    # Web應用界面 (可選)
-seaborn>=0.11.0                # 統計視覺化
-pillow>=8.3.0                  # 圖像處理
+# 系統資訊與監控
+psutil>=5.8.0                 # 系統資源監控
+GPUtil>=1.4.0                 # GPU資訊監控
+py-cpuinfo>=8.0.0             # CPU資訊取得
 
-# ===== OpenGL支持 (進階視覺化) =====
-PyOpenGL>=3.1.6                # OpenGL綁定
-PyOpenGL-accelerate>=3.1.6     # OpenGL加速
-moderngl>=5.6.0                # 現代OpenGL接口 (可選)
+# 資料驗證與型別檢查
+typing-extensions>=4.0.0      # 型別提示擴充
+pydantic>=1.8.0               # 資料驗證
 
-# ===== 地理資訊系統 =====
-pyproj>=3.3.0                  # 座標投影轉換
-geopy>=2.2.0                   # 地理計算
-folium>=0.12.0                 # 地圖視覺化 (可選)
+# 網路與API
+requests>=2.26.0              # HTTP請求
+urllib3>=1.26.0               # URL處理
 
-# ===== 網路和通訊 =====
-requests>=2.27.0               # HTTP請求
-websockets>=10.3               # WebSocket通訊 (可選)
-paho-mqtt>=1.6.0               # MQTT協議 (IoT通訊，可選)
+# 測試框架
+pytest>=6.2.0                 # 單元測試框架
+pytest-benchmark>=3.4.0       # 效能測試
+pytest-cov>=3.0.0             # 覆蓋率測試
+pytest-mock>=3.6.0            # Mock測試
 
-# ===== 配置和日誌 =====
-pyyaml>=6.0                    # YAML配置檔案
-toml>=0.10.2                   # TOML配置檔案
-colorlog>=6.6.0                # 彩色日誌輸出
+# 程式碼品質
+flake8>=4.0.0                 # 程式碼風格檢查
+black>=22.0.0                 # 程式碼格式化
+mypy>=0.910                   # 靜態型別檢查
 
-# ===== 測試和開發工具 =====
-pytest>=7.1.0                 # 單元測試
-pytest-cov>=3.0.0             # 測試覆蓋率
-black>=22.3.0                  # 代碼格式化
-flake8>=4.0.0                  # 代碼風格檢查
-mypy>=0.950                    # 類型檢查
+# 文件生成
+sphinx>=4.2.0                 # API文件生成
+sphinx-rtd-theme>=1.0.0       # 文件主題
 
-# ===== 效能監控 =====
-memory-profiler>=0.60.0        # 記憶體分析
-py-spy>=0.3.12                 # 效能分析
-line-profiler>=3.5.0           # 逐行效能分析
+# 專案管理
+setuptools>=57.0.0            # 套件建置工具
+wheel>=0.37.0                 # 輪子格式支援
+twine>=3.4.0                  # PyPI上傳工具
 
-# ===== 數據分析和機器學習 (可選) =====
-jupyter>=1.0.0                 # Jupyter筆記本
-notebook>=6.4.0                # Jupyter Notebook
-ipywidgets>=7.7.0              # 互動式小部件
-
-# ===== 資料庫支持 (可選) =====
-sqlite3; python_version < "2.5"  # SQLite (通常內建)
-sqlalchemy>=1.4.0              # ORM框架
-
-# ===== 序列化和壓縮 =====
-pickle5>=0.0.12; python_version < "3.8"  # 改進的pickle
-lz4>=4.0.0                     # 快速壓縮
-blosc>=1.10.0                  # 高效能壓縮
-
-# ===== 時間序列處理 =====
-arrow>=1.2.0                   # 更好的日期時間處理
-pendulum>=2.1.0                # 時區處理
-
-# ===== 系統資源監控 =====
-GPUtil>=1.4.0                  # GPU使用率監控
-nvidia-ml-py>=11.495.46        # NVIDIA GPU監控
-
-# ===== 特定平台依賴 =====
-# Windows特定
-pywin32>=304; sys_platform == "win32"
-wmi>=1.5.1; sys_platform == "win32"
-
-# Linux特定  
-python3-dev; sys_platform == "linux"
-
-# ===== 可選的高級功能 =====
-# 分散式計算
-# dask[complete]>=2022.7.0     # 大規模並行計算
-# ray>=1.13.0                  # 分散式機器學習
-
-# 深度學習 (如需要AI功能)
-# torch>=1.12.0               # PyTorch
-# tensorflow>=2.9.0           # TensorFlow
-
-# ===== 安裝說明 =====
-# 基本安裝 (CPU版本):
-#   pip install -r requirements.txt
+# ============================================================
+# GPU 加速套件 (條件安裝)
+# ============================================================
+# 
+# 注意：CuPy需要根據CUDA版本選擇安裝
+# 請在安裝基本依賴後，根據您的CUDA版本選擇一個：
 #
-# GPU加速安裝:
-#   1. 確保安裝NVIDIA驅動和CUDA工具包
-#   2. pip install -r requirements.txt
-#   3. 如果cupy安裝失敗，請訪問: https://docs.cupy.dev/en/stable/install.html
+# CUDA 11.x 用戶請執行：
+# pip install cupy-cuda11x>=10.0.0
 #
-# 開發環境安裝:
-#   pip install -r requirements.txt
-#   pip install -e .
+# CUDA 12.x 用戶請執行：
+# pip install cupy-cuda12x>=11.0.0
 #
-# Docker環境:
-#   參考 Dockerfile 進行容器化部署
+# ROCm (AMD GPU) 用戶請執行：
+# pip install cupy-rocm-5-0>=10.0.0
+#
+# 無GPU或僅CPU模式用戶：
+# 無需安裝CuPy，系統會自動回退到NumPy
 
-# ===== 版本兼容性說明 =====
-# Python版本要求: 3.8+
-# 推薦版本: Python 3.9-3.11
-# CUDA版本: 11.0+ (GPU加速)
-# 記憶體需求: 最少4GB，推薦8GB+
-# 硬碟空間: 2GB (包含依賴)
+# ============================================================
+# 平台特定依賴
+# ============================================================
+#
+# Windows 額外需求:
+# - Microsoft Visual C++ Redistributable
+# - Windows SDK (開發用途)
+#
+# Linux 額外需求 (Ubuntu/Debian):
+# sudo apt-get update
+# sudo apt-get install python3-tk python3-dev
+# sudo apt-get install libgl1-mesa-glx libglu1-mesa
+# sudo apt-get install libegl1-mesa libxrandr2 libxss1
+# sudo apt-get install libxcursor1 libxcomposite1 libasound2-dev
+#
+# macOS 額外需求:
+# brew install python-tk
+# brew install mesa
 
-# ===== 故障排除 =====
-# 如果cupy安裝失敗:
-#   - 檢查CUDA版本: nvcc --version
-#   - 安裝對應版本: pip install cupy-cuda11x 或 cupy-cuda12x
-#   - macOS用戶將自動使用CPU模式
+# ============================================================
+# 開發環境依賴 (可選)
+# ============================================================
 #
-# 如果OpenGL相關庫安裝失敗:
-#   - 這些是可選依賴，可以跳過
-#   - 程式會自動回退到標準視覺化
+# Jupyter Notebook 支援:
+# jupyter>=1.0.0
+# ipywidgets>=7.6.0
+# 
+# IDE整合:
+# python-lsp-server[all]>=1.2.0
+# 
+# 效能分析:
+# line-profiler>=3.3.0
+# memory-profiler>=0.60.0
+# py-spy>=0.3.0
 #
-# 如果matplotlib顯示問題:
-#   - Linux: sudo apt-get install python3-tk
-#   - 嘗試不同後端: matplotlib.use('TkAgg')
+# 視覺化增強:
+# plotly>=5.3.0
+# bokeh>=2.4.0
+# seaborn>=0.11.0
+
+# ============================================================
+# 安裝指令範例
+# ============================================================
+#
+# 1. 基本安裝（CPU模式）：
+#    pip install -r requirements.txt
+#
+# 2. GPU加速安裝：
+#    pip install -r requirements.txt
+#    pip install cupy-cuda11x  # 或 cupy-cuda12x
+#
+# 3. 完整開發環境：
+#    pip install -r requirements.txt
+#    pip install -r requirements-dev.txt
+#    pip install cupy-cuda11x
+#
+# 4. 最小安裝（僅核心功能）：
+#    pip install numpy matplotlib tkinter-page pyyaml loguru
+#
+# ============================================================

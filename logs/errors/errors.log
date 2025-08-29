@@ -1,0 +1,20 @@
+2025-08-30 03:08:10 - main - INFO - logging_config.py:374 - === 系統信息 ===
+2025-08-30 03:08:10 - main - INFO - logging_config.py:375 - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-08-30 03:08:10 - main - INFO - logging_config.py:376 - 平台: nt
+2025-08-30 03:08:10 - main - INFO - logging_config.py:377 - 工作目錄: C:\Users\joy46\OneDrive\文件\drone_simulator_gpu_version-main
+2025-08-30 03:08:10 - main - WARNING - logging_config.py:390 - GPU信息獲取失敗: attempted relative import beyond top-level package
+2025-08-30 03:08:48 - main - INFO - logging_config.py:374 - === 系統信息 ===
+2025-08-30 03:08:48 - main - INFO - logging_config.py:375 - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-08-30 03:08:48 - main - INFO - logging_config.py:376 - 平台: nt
+2025-08-30 03:08:48 - main - INFO - logging_config.py:377 - 工作目錄: C:\Users\joy46\OneDrive\文件\drone_simulator_gpu_version-main
+2025-08-30 03:08:48 - main - WARNING - logging_config.py:390 - GPU信息獲取失敗: attempted relative import beyond top-level package
+2025-08-30 03:09:00 - main - INFO - logging_config.py:374 - === 系統信息 ===
+2025-08-30 03:09:00 - main - INFO - logging_config.py:375 - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-08-30 03:09:00 - main - INFO - logging_config.py:376 - 平台: nt
+2025-08-30 03:09:00 - main - INFO - logging_config.py:377 - 工作目錄: C:\Users\joy46\OneDrive\文件\drone_simulator_gpu_version-main
+2025-08-30 03:09:00 - main - WARNING - logging_config.py:390 - GPU信息獲取失敗: attempted relative import beyond top-level package
+2025-08-30 03:14:10 - main - INFO - logging_config.py:374 - === 系統信息 ===
+2025-08-30 03:14:10 - main - INFO - logging_config.py:375 - Python版本: 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)]
+2025-08-30 03:14:10 - main - INFO - logging_config.py:376 - 平台: nt
+2025-08-30 03:14:10 - main - INFO - logging_config.py:377 - 工作目錄: C:\Users\joy46\OneDrive\文件\drone_simulator_gpu_version-main
+2025-08-30 03:14:10 - main - WARNING - logging_config.py:390 - GPU信息獲取失敗: attempted relative import beyond top-level package

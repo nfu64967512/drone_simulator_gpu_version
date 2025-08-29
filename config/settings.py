@@ -1,212 +1,498 @@
 """
-Enhanced configuration settings with GPU acceleration support
+無人機模擬器設定檔案
+包含所有系統配置參數，支援GPU/CPU後端切換
 """
-from dataclasses import dataclass, field
-from enum import Enum
-from typing import Optional
+
 import os
+#import yaml
+import logging
+from typing import Dict, Any, Optional, List
+from dataclasses import dataclass, asdict
+from enum import Enum
 
-class ComputeBackend(Enum):
-    """計算後端選項"""
+logger = logging.getLogger(__name__)
+
+class BackendType(Enum):
+    """後端類型"""
+    AUTO = "auto"
+    GPU = "gpu" 
     CPU = "cpu"
-    GPU = "gpu"
-    AUTO = "auto"  # 自動檢測並選擇最佳後端
+    HYBRID = "hybrid"
 
-class FlightPhase(Enum):
-    """飛行階段枚舉（向後相容）"""
-    GROUND = "ground"
-    TAXI = "taxi"
-    TAKEOFF = "takeoff"
-    CLIMB = "climb"
-    CRUISE = "cruise"
-    DESCENT = "descent"
-    APPROACH = "approach"
-    LANDING = "landing"
-    LANDED = "landed"
-
-class DroneStatus(Enum):
-    """無人機狀態枚舉（向後相容）"""
-    IDLE = "idle"
-    READY = "ready"
-    FLYING = "flying"
-    HOVERING = "hovering"
-    RETURNING = "returning"
-    EMERGENCY = "emergency"
-    MAINTENANCE = "maintenance"
-
-class MissionType(Enum):
-    """任務類型枚舉（向後相容）"""
-    SURVEY = "survey"
-    DELIVERY = "delivery"
-    PATROL = "patrol"
-    SEARCH_RESCUE = "search_rescue"
-    FORMATION_FLIGHT = "formation_flight"
-    CUSTOM = "custom"
+class LogLevel(Enum):
+    """日誌級別"""
+    DEBUG = "DEBUG"
+    INFO = "INFO"
+    WARNING = "WARNING"
+    ERROR = "ERROR"
 
 @dataclass
-class GPUConfig:
-    """GPU加速配置"""
-    backend: ComputeBackend = ComputeBackend.AUTO
-    device_id: int = 0  # GPU設備ID (如果有多個GPU)
-    memory_pool: bool = True  # 是否使用記憶體池優化
-    enable_fallback: bool = True  # GPU不可用時自動回退到CPU
-    batch_size: int = 1000  # GPU批次處理大小
-    force_sync: bool = False  # 強制同步GPU操作（除錯用）
+class BackendConfig:
+    """後端配置"""
+    backend_type: BackendType = BackendType.AUTO
+    use_gpu: bool = True
+    gpu_device_id: int = 0
+    force_cpu_modules: List[str] = None
+    batch_size: int = 1000
+    memory_pool: bool = True
     
-    # GPU加速模組開關
-    accelerate_collision_detection: bool = True
-    accelerate_coordinate_conversion: bool = True  
-    accelerate_trajectory_calculation: bool = True
-    accelerate_visualization: bool = True
-
-@dataclass
-class TakeoffConfig:
-    """起飛配置"""
-    formation_spacing: float = 6.0  # 無人機間距（公尺）
-    takeoff_altitude: float = 10.0  # 初始爬升高度
-    hover_time: float = 2.0  # 懸停時間
-    east_offset: float = 50.0  # 起飛區域偏移
+    def __post_init__(self):
+        if self.force_cpu_modules is None:
+            self.force_cpu_modules = []
 
 @dataclass
 class SafetyConfig:
     """安全配置"""
-    safety_distance: float = 5.0  # 最小安全距離
-    warning_distance: float = 8.0  # 警告閾值
-    critical_distance: float = 3.0  # 緊急碰撞閾值
-    collision_check_interval: float = 0.1  # 檢查頻率（秒）
+    safety_distance: float = 5.0          # 安全距離 (m)
+    warning_distance: float = 8.0         # 警告距離 (m) 
+    critical_distance: float = 3.0        # 危險距離 (m)
+    emergency_distance: float = 1.5       # 緊急距離 (m)
+    collision_check_interval: float = 0.1 # 碰撞檢查間隔 (s)
+    max_loiter_time: float = 30.0         # 最大等待時間 (s)
+    
+    def validate(self) -> bool:
+        """驗證安全配置的合理性"""
+        if not (self.emergency_distance < self.critical_distance < 
+                self.safety_distance < self.warning_distance):
+            logger.error("安全距離配置不合理")
+            return False
+        return True
 
 @dataclass
-class PerformanceConfig:
-    """效能配置"""
-    max_trajectory_points: int = 10000  # 最大軌跡點數
-    update_interval: float = 0.02  # 畫面更新間隔（秒）
-    parallel_workers: int = 4  # CPU並行工作數量
-    
+class FlightConfig:
+    """飛行配置"""
+    cruise_speed: float = 8.0             # 巡航速度 (m/s)
+    climb_rate: float = 2.0               # 爬升率 (m/s)
+    descent_rate: float = 1.5             # 下降率 (m/s)
+    takeoff_altitude: float = 10.0        # 起飛高度 (m)
+    landing_speed: float = 1.0            # 降落速度 (m/s)
+    hover_time: float = 2.0               # 懸停時間 (s)
+    acceleration: float = 2.0             # 最大加速度 (m/s²)
+    turn_radius: float = 5.0              # 轉彎半徑 (m)
+    max_altitude: float = 120.0           # 最大飛行高度 (m)
+    formation_spacing: float = 3.0        # 編隊間距 (m)
+
 @dataclass
 class VisualizationConfig:
     """視覺化配置"""
-    resolution: tuple = (1920, 1080)
+    # 3D繪圖設定
+    figure_size: tuple = (18, 12)
     dpi: int = 100
-    trail_length: int = 100  # 軌跡長度
-    collision_marker_size: float = 0.5
-    enable_3d_acceleration: bool = True
+    update_interval: int = 33             # ~30fps
     
+    # 色彩配置
+    background_color: str = "#1e1e1e"
+    grid_color: str = "#404040"
+    text_color: str = "#00d4aa"
+    warning_color: str = "#ff5722"
+    
+    # 軌跡顯示
+    trajectory_alpha: float = 0.4
+    flown_path_alpha: float = 0.9
+    waypoint_size: int = 25
+    drone_model_size: int = 200
+    
+    # 碰撞警告
+    collision_line_width: float = 4.0
+    warning_marker_size: int = 300
+    critical_marker_size: int = 500
+    
+    # 性能設定
+    max_trajectory_points: int = 10000
+    render_quality: str = "high"          # "high", "medium", "low"
+    enable_shadows: bool = True
+    enable_smooth_lines: bool = True
+
 @dataclass
-class SimulationSettings:
-    """主要模擬設定"""
-    gpu: GPUConfig = field(default_factory=GPUConfig)
-    takeoff: TakeoffConfig = field(default_factory=TakeoffConfig)
-    safety: SafetyConfig = field(default_factory=SafetyConfig)
-    performance: PerformanceConfig = field(default_factory=PerformanceConfig)
-    visualization: VisualizationConfig = field(default_factory=VisualizationConfig)
+class PerformanceConfig:
+    """性能配置"""
+    # GPU設定
+    gpu_memory_limit: float = 0.8         # GPU記憶體使用限制 (0-1)
+    enable_memory_pool: bool = True
+    auto_gc_threshold: float = 0.9        # 自動垃圾回收閾值
+    
+    # 並行處理
+    max_threads: int = 4
+    enable_multithreading: bool = True
+    thread_pool_size: int = 8
+    
+    # 快取設定
+    enable_trajectory_cache: bool = True
+    cache_size_limit: int = 1000          # MB
+    enable_position_cache: bool = True
+    
+    # 優化設定
+    enable_batch_processing: bool = True
+    batch_size: int = 1000
+    enable_vectorization: bool = True
+    optimize_memory_usage: bool = True
+
+@dataclass
+class UIConfig:
+    """用戶界面配置"""
+    # 主視窗
+    window_title: str = "進階無人機群飛模擬器 - GPU版本"
+    window_geometry: str = "1920x1080"
+    maximize_on_start: bool = True
+    
+    # 主題設定
+    theme: str = "dark"                   # "dark", "light"
+    font_family: str = "Arial"
+    font_size: int = 10
+    
+    # 控制面板
+    control_panel_width: int = 280
+    status_text_height: int = 12
+    warning_text_height: int = 6
+    
+    # 快捷鍵
+    shortcuts: Dict[str, str] = None
     
     def __post_init__(self):
-        """初始化後的配置檢查"""
-        # 從環境變數讀取GPU設定
-        if 'DRONE_SIM_GPU' in os.environ:
-            gpu_setting = os.environ['DRONE_SIM_GPU'].lower()
-            if gpu_setting == 'true' or gpu_setting == '1':
-                self.gpu.backend = ComputeBackend.GPU
-            elif gpu_setting == 'false' or gpu_setting == '0':
-                self.gpu.backend = ComputeBackend.CPU
+        if self.shortcuts is None:
+            self.shortcuts = {
+                "play_pause": "space",
+                "reset": "r",
+                "stop": "s", 
+                "top_view": "1",
+                "side_view": "2",
+                "3d_view": "3",
+                "export": "ctrl+s",
+                "load": "ctrl+o",
+                "quit": "escape"
+            }
 
-# 向後相容的設定別名
+@dataclass
+class LoggingConfig:
+    """日誌配置"""
+    level: LogLevel = LogLevel.INFO
+    format: str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    date_format: str = "%Y-%m-%d %H:%M:%S"
+    
+    # 檔案輸出
+    log_to_file: bool = True
+    log_file_path: str = "logs/simulator.log"
+    max_file_size: int = 10               # MB
+    backup_count: int = 5
+    
+    # 控制台輸出  
+    log_to_console: bool = True
+    console_level: LogLevel = LogLevel.INFO
+    
+    # GPU相關日誌
+    log_gpu_operations: bool = False
+    log_memory_usage: bool = True
+    log_performance_metrics: bool = True
+
 @dataclass 
-class DroneConfig:
-    """單個無人機配置（向後相容）"""
-    max_speed: float = 15.0  # m/s
-    max_altitude: float = 120.0  # meters
-    battery_capacity: float = 5000.0  # mAh
-    flight_time: float = 25.0  # minutes
-    payload_capacity: float = 2.0  # kg
-
-@dataclass
-class WeatherConfig:
-    """天氣配置（向後相容）"""
-    wind_speed: float = 0.0  # m/s
-    wind_direction: float = 0.0  # degrees
-    temperature: float = 20.0  # celsius
-    humidity: float = 50.0  # percentage
-    visibility: float = 10000.0  # meters
-
-@dataclass
-class NetworkConfig:
-    """網路配置（向後相容）"""
-    enable_logging: bool = True
-    log_level: str = "INFO"
-    auto_save: bool = True
-    save_interval: int = 60  # seconds
-
-@dataclass
-class SimulatorConfig:
-    """模擬器配置（向後相容）"""
-    max_drones: int = 50
-    simulation_speed: float = 1.0
-    auto_start: bool = False
-    enable_physics: bool = True
-    collision_detection: bool = True
-    real_time_mode: bool = True
-
-
-@dataclass
-class UILabels:
-    """用戶界面標籤配置（向後相容）"""
-    # 主窗口標籤
-    window_title: str = "無人機群模擬器"
-    menu_file: str = "檔案"
-    menu_edit: str = "編輯"
-    menu_view: str = "檢視"
-    menu_help: str = "說明"
+class ExportConfig:
+    """導出配置"""
+    # 預設路徑
+    default_export_dir: str = "exports"
     
-    # 按鈕標籤
-    btn_start: str = "開始"
-    btn_stop: str = "停止"
-    btn_pause: str = "暫停"
-    btn_reset: str = "重置"
-    btn_load: str = "載入"
-    btn_save: str = "儲存"
+    # 檔案格式
+    mission_file_format: str = "waypoints"  # "waypoints", "json"
+    add_timestamp: bool = True
+    create_summary: bool = True
     
-    # 狀態標籤
-    status_ready: str = "就緒"
-    status_running: str = "運行中"
-    status_paused: str = "已暫停"
-    status_stopped: str = "已停止"
+    # QGC設定
+    qgc_version: str = "110"
+    default_speed: float = 8.0
+    default_altitude: float = 15.0
     
-    # 工具提示
-    tooltip_start: str = "開始模擬"
-    tooltip_stop: str = "停止模擬"
-    tooltip_pause: str = "暫停模擬"
-    tooltip_reset: str = "重置模擬"
+    # 壓縮設定
+    compress_exports: bool = False
+    compression_format: str = "zip"       # "zip", "tar"
+
+@dataclass
+class SimulationConfig:
+    """完整的模擬配置"""
+    # 子配置
+    backend: BackendConfig = None
+    safety: SafetyConfig = None
+    flight: FlightConfig = None
+    visualization: VisualizationConfig = None
+    performance: PerformanceConfig = None  
+    ui: UIConfig = None
+    logging: LoggingConfig = None
+    export: ExportConfig = None
+    
+    # 基本設定
+    version: str = "2.0.0"
+    debug_mode: bool = False
+    
+    def __post_init__(self):
+        """初始化預設值"""
+        if self.backend is None:
+            self.backend = BackendConfig()
+        if self.safety is None:
+            self.safety = SafetyConfig()
+        if self.flight is None:
+            self.flight = FlightConfig()
+        if self.visualization is None:
+            self.visualization = VisualizationConfig()
+        if self.performance is None:
+            self.performance = PerformanceConfig()
+        if self.ui is None:
+            self.ui = UIConfig()
+        if self.logging is None:
+            self.logging = LoggingConfig()
+        if self.export is None:
+            self.export = ExportConfig()
+    
+    def validate(self) -> bool:
+        """驗證所有配置"""
+        if not self.safety.validate():
+            return False
+        
+        # 檢查飛行參數
+        if self.flight.cruise_speed <= 0:
+            logger.error("巡航速度必須大於0")
+            return False
+            
+        if self.flight.takeoff_altitude <= 0:
+            logger.error("起飛高度必須大於0") 
+            return False
+        
+        # 檢查性能配置
+        if not (0 < self.performance.gpu_memory_limit <= 1):
+            logger.error("GPU記憶體限制必須在(0,1]範圍內")
+            return False
+        
+        return True
 
 
-# 全域設定實例
-settings = SimulationSettings()
-
-# 向後相容的額外設定實例
-drone_config = DroneConfig()
-weather_config = WeatherConfig()  
-network_config = NetworkConfig()
-simulator_config = SimulatorConfig()
-ui_labels = UILabels()
-
-def get_compute_backend_info():
-    """獲取計算後端資訊"""
-    return {
-        'backend': settings.gpu.backend,
-        'device_id': settings.gpu.device_id,
-        'fallback_enabled': settings.gpu.enable_fallback,
-        'acceleration_modules': {
-            'collision_detection': settings.gpu.accelerate_collision_detection,
-            'coordinate_conversion': settings.gpu.accelerate_coordinate_conversion,
-            'trajectory_calculation': settings.gpu.accelerate_trajectory_calculation,
-            'visualization': settings.gpu.accelerate_visualization,
+class ConfigManager:
+    """
+    配置管理器
+    負責載入、保存和管理所有配置
+    """
+    
+    def __init__(self, config_dir: str = "config"):
+        """
+        初始化配置管理器
+        
+        Args:
+            config_dir: 配置檔案目錄
+        """
+        self.config_dir = config_dir
+        self.config_file = os.path.join(config_dir, "settings.yaml")
+        self.user_config_file = os.path.join(config_dir, "user_settings.yaml")
+        
+        # 確保配置目錄存在
+        os.makedirs(config_dir, exist_ok=True)
+        
+        self._config: Optional[SimulationConfig] = None
+    
+    def load_config(self, config_file: Optional[str] = None) -> SimulationConfig:
+        """
+        載入配置檔案
+        
+        Args:
+            config_file: 配置檔案路徑（可選）
+            
+        Returns:
+            模擬配置對象
+        """
+        if config_file is None:
+            config_file = self.config_file
+        
+        # 載入預設配置
+        config = SimulationConfig()
+        
+        # 如果配置檔案存在，載入並合併
+        # if os.path.exists(config_file):
+        #     try:
+        #         with open(config_file, 'r', encoding='utf-8') as f:
+        #             config_data = yaml.safe_load(f)
+                
+        #         if config_data:
+        #             config = self._merge_config(config, config_data)
+                    
+        #         logger.info(f"成功載入配置檔案: {config_file}")
+                
+        #     except Exception as e:
+        #         logger.error(f"載入配置檔案失敗: {e}")
+        #         logger.info("使用預設配置")
+        
+        # 載入用戶自定義配置
+        # if os.path.exists(self.user_config_file):
+        #     try:
+        #         with open(self.user_config_file, 'r', encoding='utf-8') as f:
+        #             user_config_data = yaml.safe_load(f)
+                
+        #         if user_config_data:
+        #             config = self._merge_config(config, user_config_data)
+                    
+        #         logger.info(f"成功載入用戶配置: {self.user_config_file}")
+                
+        #     except Exception as e:
+        #         logger.warning(f"載入用戶配置失敗: {e}")
+        
+        # 驗證配置
+        if not config.validate():
+            logger.error("配置驗證失敗，使用預設配置")
+            config = SimulationConfig()
+        
+        self._config = config
+        return config
+    
+    def save_config(self, config: SimulationConfig, 
+                   config_file: Optional[str] = None) -> bool:
+        """
+        保存配置檔案
+        
+        Args:
+            config: 要保存的配置
+            config_file: 配置檔案路徑（可選）
+            
+        Returns:
+            是否保存成功
+        """
+        # if config_file is None:
+        #     config_file = self.user_config_file
+        
+        # try:
+        #     config_dict = asdict(config)
+            
+        #     with open(config_file, 'w', encoding='utf-8') as f:
+        #         yaml.dump(config_dict, f, default_flow_style=False, 
+        #                  allow_unicode=True, indent=2)
+            
+        #     logger.info(f"配置已保存至: {config_file}")
+        #     return True
+            
+        # except Exception as e:
+        #     logger.error(f"保存配置失敗: {e}")
+        #     return False
+    
+    def _merge_config(self, base_config: SimulationConfig, 
+                     config_data: Dict[str, Any]) -> SimulationConfig:
+        """
+        合併配置數據
+        
+        Args:
+            base_config: 基礎配置
+            config_data: 要合併的配置數據
+            
+        Returns:
+            合併後的配置
+        """
+        try:
+            # 遞歸更新配置
+            for key, value in config_data.items():
+                if hasattr(base_config, key):
+                    attr = getattr(base_config, key)
+                    
+                    if isinstance(value, dict) and hasattr(attr, '__dict__'):
+                        # 遞歸更新嵌套配置
+                        for sub_key, sub_value in value.items():
+                            if hasattr(attr, sub_key):
+                                setattr(attr, sub_key, sub_value)
+                    else:
+                        # 直接設定屬性
+                        setattr(base_config, key, value)
+                        
+        except Exception as e:
+            logger.warning(f"合併配置時出錯: {e}")
+        
+        return base_config
+    
+    def get_config(self) -> SimulationConfig:
+        """獲取當前配置"""
+        if self._config is None:
+            self._config = self.load_config()
+        return self._config
+    
+    def update_backend_config(self, backend_type: BackendType, 
+                            use_gpu: bool = None, 
+                            gpu_device: int = None) -> bool:
+        """
+        更新後端配置
+        
+        Args:
+            backend_type: 後端類型
+            use_gpu: 是否使用GPU
+            gpu_device: GPU設備ID
+            
+        Returns:
+            是否更新成功
+        """
+        try:
+            config = self.get_config()
+            config.backend.backend_type = backend_type
+            
+            if use_gpu is not None:
+                config.backend.use_gpu = use_gpu
+                
+            if gpu_device is not None:
+                config.backend.gpu_device_id = gpu_device
+            
+            self.save_config(config)
+            logger.info(f"後端配置已更新: {backend_type.value}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"更新後端配置失敗: {e}")
+            return False
+    
+    def get_gpu_config(self) -> Dict[str, Any]:
+        """獲取GPU相關配置"""
+        config = self.get_config()
+        
+        return {
+            'use_gpu': config.backend.use_gpu,
+            'device_id': config.backend.gpu_device_id,
+            'batch_size': config.backend.batch_size,
+            'memory_pool': config.backend.memory_pool,
+            'memory_limit': config.performance.gpu_memory_limit,
+            'enable_cache': config.performance.enable_trajectory_cache
         }
-    }
+    
+    def create_default_config_file(self) -> bool:
+        """創建預設配置檔案"""
+        try:
+            default_config = SimulationConfig()
+            return self.save_config(default_config, self.config_file)
+        except Exception as e:
+            logger.error(f"創建預設配置檔案失敗: {e}")
+            return False
 
-def set_compute_backend(backend: ComputeBackend, device_id: int = 0):
-    """設置計算後端"""
-    settings.gpu.backend = backend
-    settings.gpu.device_id = device_id
-    print(f"✅ 計算後端設置為: {backend.value.upper()}")
-    if backend == ComputeBackend.GPU:
-        print(f"📱 GPU設備ID: {device_id}")
+
+# 全域配置管理器實例
+_config_manager = None
+
+def get_config_manager() -> ConfigManager:
+    """獲取全域配置管理器"""
+    global _config_manager
+    if _config_manager is None:
+        _config_manager = ConfigManager()
+    return _config_manager
+
+def get_simulation_config() -> SimulationConfig:
+    """獲取模擬配置"""
+    return get_config_manager().get_config()
+
+def update_gpu_backend(use_gpu: bool, device_id: int = 0) -> bool:
+    """更新GPU後端設定"""
+    manager = get_config_manager()
+    backend_type = BackendType.GPU if use_gpu else BackendType.CPU
+    return manager.update_backend_config(backend_type, use_gpu, device_id)
+
+
+# 預設配置常量
+DEFAULT_COLORS = [
+    '#FF4444', '#44FF44', '#4444FF', '#FFFF44',
+    '#FF44FF', '#44FFFF', '#FFAA44', '#AA44FF'
+]
+
+# 系統限制
+SYSTEM_LIMITS = {
+    'max_drones': 16,
+    'max_waypoints_per_drone': 1000,
+    'max_simulation_time': 3600,  # 1小時
+    'min_safety_distance': 1.0,
+    'max_safety_distance': 50.0,
+    'min_speed': 1.0,
+    'max_speed': 30.0
+}

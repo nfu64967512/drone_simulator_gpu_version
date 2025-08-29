@@ -1,681 +1,723 @@
-#!/usr/bin/env python3
 """
-無人機群模擬器主程式 - 完整功能版
-支持GPU/CPU後端選擇、3D軌跡模擬、碰撞檢測、檔案導入等完整功能
+無人機群飛模擬器主應用程式 - GPU加速版本
+整合所有模組，提供完整的GUI應用程式
 """
+
 import sys
 import os
-import argparse
 import tkinter as tk
-from tkinter import messagebox, ttk
+from tkinter import messagebox
 import logging
-import json
-from pathlib import Path
+import threading
+import time
+import argparse
+from typing import Dict, List, Optional, Any
 
-# 確保專案根目錄在Python路徑中
-project_root = Path(__file__).parent
-sys.path.insert(0, str(project_root))
+# 確保模組路徑
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# 導入配置和工具
-from config.settings import settings, ComputeBackend, set_compute_backend, get_compute_backend_info
-from utils.logging_config import setup_logging
+try:
+    import cupy as cp
+    GPU_AVAILABLE = True
+    print("GPU支援可用")
+except ImportError:
+    GPU_AVAILABLE = False
+    print("GPU支援不可用，將使用CPU模式")
+
+# 導入自定義模組
+from config.settings import get_simulation_config, get_config_manager, BackendType
+from simulator.advanced_simulator_main import AdvancedDroneSimulator
+from gui.gui_advanced_plotter import Advanced3DPlotter
+from gui.control_panel import CompactControlPanel
+from utils.gpu_utils import GPUSystemChecker, setup_gpu_environment
 
 # 設置日誌
-logger = setup_logging()
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('logs/simulator.log', encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
-class BackendSelector:
-    """後端選擇對話框 - 增強版"""
+class DroneSimulatorApp:
+    """
+    無人機模擬器主應用程式
+    """
     
     def __init__(self):
-        self.selected_backend = None
-        self.selected_device = 0
-        self.root = None
-        self.result = None
-
-    def show_selection_dialog(self):
-        """顯示後端選擇對話框"""
+        """初始化應用程式"""
+        # 載入配置
+        self.config = get_simulation_config()
+        
+        # 檢查並設置GPU環境
+        self._setup_gpu_environment()
+        
+        # 創建主視窗
         self.root = tk.Tk()
-        self.root.title("無人機群模擬器 - 計算後端選擇")
-        self.root.geometry("650x750")
-        self.root.resizable(True, True)
+        self._setup_main_window()
         
-        # 設置UI樣式
-        self._setup_ui_style()
+        # 初始化核心組件
+        self.simulator = None
+        self.plotter = None
+        self.control_panel = None
         
-        # 創建主框架
-        main_frame = ttk.Frame(self.root, padding="20")
-        main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        # 模擬狀態
+        self.is_running = False
+        self.animation_thread = None
+        self.last_update_time = time.time()
         
-        # 標題
-        title_label = ttk.Label(
-            main_frame, 
-            text="無人機群模擬器 - 專業版",
-            font=("Arial", 16, "bold")
-        )
-        title_label.grid(row=0, column=0, columnspan=2, pady=(0, 20))
+        # 初始化GUI
+        self._initialize_components()
+        self._setup_callbacks()
+        self._setup_menu()
+        self._bind_keyboard_shortcuts()
         
-        # 功能介紹
-        self._create_feature_intro(main_frame)
-        
-        # 後端選擇區域
-        self._create_backend_selection(main_frame)
-        
-        # GPU資訊顯示
-        self._create_gpu_info_section(main_frame)
-        
-        # 進階設定
-        self._create_advanced_settings(main_frame)
-        
-        # 按鈕區域
-        self._create_buttons(main_frame)
-        
-        # 檢測可用後端
-        self._detect_available_backends()
-        
-        # 運行對話框
-        self.root.mainloop()
-        
-        return self.result
-
-    def _setup_ui_style(self):
-        """設置UI樣式"""
-        style = ttk.Style()
-        style.theme_use('clam')
-        
-        # 自訂樣式
-        style.configure('Title.TLabel', font=('Arial', 12, 'bold'))
-        style.configure('Info.TLabel', font=('Arial', 9))
-        style.configure('Feature.TLabel', font=('Arial', 10), foreground='blue')
-
-    def _create_feature_intro(self, parent):
-        """創建功能介紹區域"""
-        intro_frame = ttk.LabelFrame(parent, text="核心功能", padding="10")
-        intro_frame.grid(row=1, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(0, 15))
-        
-        features = [
-            "✈️ 3D即時軌跡模擬與視覺化",
-            "🛡️ GPU加速碰撞檢測與避讓",
-            "📁 支援QGC/CSV任務檔案導入",
-            "🎯 智能任務修改與導出",
-            "⚡ 高性能GPU/CPU混合計算",
-            "📊 即時性能監控與統計"
-        ]
-        
-        for i, feature in enumerate(features):
-            ttk.Label(intro_frame, text=feature, style='Feature.TLabel').grid(
-                row=i//2, column=i%2, sticky=tk.W, padx=10, pady=2
-            )
-
-    def _create_backend_selection(self, parent):
-        """創建後端選擇區域"""
-        backend_frame = ttk.LabelFrame(parent, text="計算後端選擇", padding="10")
-        backend_frame.grid(row=2, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(0, 15))
-        
-        # 後端選項
-        self.backend_var = tk.StringVar(value="auto")
-        
-        # 自動選擇
-        ttk.Radiobutton(
-            backend_frame,
-            text="🔄 自動選擇 (推薦)",
-            variable=self.backend_var,
-            value="auto"
-        ).grid(row=0, column=0, sticky=tk.W, pady=2)
-        
-        ttk.Label(
-            backend_frame,
-            text="    自動檢測並選擇最佳計算後端",
-            style='Info.TLabel'
-        ).grid(row=0, column=1, sticky=tk.W, padx=(10, 0))
-        
-        # GPU選項
-        self.gpu_radio = ttk.Radiobutton(
-            backend_frame,
-            text="🚀 GPU加速模式",
-            variable=self.backend_var,
-            value="gpu"
-        )
-        self.gpu_radio.grid(row=1, column=0, sticky=tk.W, pady=2)
-        
-        self.gpu_info_label = ttk.Label(
-            backend_frame,
-            text="    檢測中...",
-            style='Info.TLabel'
-        )
-        self.gpu_info_label.grid(row=1, column=1, sticky=tk.W, padx=(10, 0))
-        
-        # CPU選項
-        ttk.Radiobutton(
-            backend_frame,
-            text="🖥️ CPU運算模式",
-            variable=self.backend_var,
-            value="cpu"
-        ).grid(row=2, column=0, sticky=tk.W, pady=2)
-        
-        ttk.Label(
-            backend_frame,
-            text="    使用CPU進行計算 (相容性最佳)",
-            style='Info.TLabel'
-        ).grid(row=2, column=1, sticky=tk.W, padx=(10, 0))
-
-    def _create_gpu_info_section(self, parent):
-        """創建GPU資訊區域"""
-        info_frame = ttk.LabelFrame(parent, text="系統資訊", padding="10")
-        info_frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(0, 15))
-        
-        # GPU資訊文本框
-        self.gpu_info_text = tk.Text(
-            info_frame, 
-            height=8, 
-            width=65, 
-            font=('Courier', 9),
-            bg='#f0f0f0',
-            state='disabled'
-        )
-        self.gpu_info_text.grid(row=0, column=0, columnspan=2)
-        
-        # 滾動條
-        scrollbar = ttk.Scrollbar(info_frame, orient="vertical", command=self.gpu_info_text.yview)
-        scrollbar.grid(row=0, column=2, sticky=(tk.N, tk.S))
-        self.gpu_info_text.configure(yscrollcommand=scrollbar.set)
-
-    def _create_advanced_settings(self, parent):
-        """創建進階設定區域"""
-        advanced_frame = ttk.LabelFrame(parent, text="進階設定", padding="10")
-        advanced_frame.grid(row=4, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(0, 15))
-        
-        # GPU設備選擇
-        ttk.Label(advanced_frame, text="GPU設備:").grid(row=0, column=0, sticky=tk.W)
-        
-        self.device_var = tk.StringVar(value="0")
-        self.device_combo = ttk.Combobox(
-            advanced_frame, 
-            textvariable=self.device_var,
-            values=["0"], 
-            width=10,
-            state="readonly"
-        )
-        self.device_combo.grid(row=0, column=1, sticky=tk.W, padx=(10, 0))
-        
-        # 回退模式
-        self.fallback_var = tk.BooleanVar(value=True)
-        ttk.Checkbutton(
-            advanced_frame,
-            text="啟用回退模式 (GPU失敗時自動使用CPU)",
-            variable=self.fallback_var
-        ).grid(row=1, column=0, columnspan=2, sticky=tk.W, pady=(10, 0))
-        
-        # 性能設定
-        ttk.Label(advanced_frame, text="性能模式:").grid(row=2, column=0, sticky=tk.W, pady=(10, 0))
-        
-        self.performance_var = tk.StringVar(value="balanced")
-        perf_frame = tk.Frame(advanced_frame)
-        perf_frame.grid(row=3, column=0, columnspan=2, sticky=tk.W, pady=(5, 0))
-        
-        ttk.Radiobutton(perf_frame, text="節能", variable=self.performance_var, 
-                       value="power_save").pack(side=tk.LEFT, padx=(0, 10))
-        ttk.Radiobutton(perf_frame, text="平衡", variable=self.performance_var, 
-                       value="balanced").pack(side=tk.LEFT, padx=(0, 10))
-        ttk.Radiobutton(perf_frame, text="性能", variable=self.performance_var, 
-                       value="performance").pack(side=tk.LEFT)
-
-    def _create_buttons(self, parent):
-        """創建按鈕區域"""
-        button_frame = ttk.Frame(parent)
-        button_frame.grid(row=5, column=0, columnspan=2, pady=(20, 0))
-        
-        # 啟動按鈕
-        start_button = ttk.Button(
-            button_frame,
-            text="🚀 啟動模擬器",
-            command=self._on_start_clicked,
-            style='Title.TLabel'
-        )
-        start_button.pack(side=tk.LEFT, padx=(0, 10))
-        
-        # 測試按鈕
-        test_button = ttk.Button(
-            button_frame,
-            text="⚡ 性能測試",
-            command=self._on_test_clicked
-        )
-        test_button.pack(side=tk.LEFT, padx=(0, 10))
-        
-        # 幫助按鈕
-        help_button = ttk.Button(
-            button_frame,
-            text="❓ 使用說明",
-            command=self._on_help_clicked
-        )
-        help_button.pack(side=tk.LEFT, padx=(0, 10))
-        
-        # 退出按鈕
-        exit_button = ttk.Button(
-            button_frame,
-            text="❌ 退出",
-            command=self._on_exit_clicked
-        )
-        exit_button.pack(side=tk.LEFT)
-
-    def _detect_available_backends(self):
-        """檢測可用的計算後端"""
-        info_lines = ["系統計算能力檢測結果:\n"]
-        
-        # 檢測CPU
-        try:
-            import psutil
-            cpu_count = psutil.cpu_count()
-            cpu_freq = psutil.cpu_freq()
-            memory = psutil.virtual_memory()
-            
-            info_lines.append(f"[OK] CPU: {cpu_count} 核心")
-            if cpu_freq:
-                info_lines.append(f"   頻率: {cpu_freq.current:.0f} MHz")
-            info_lines.append(f"   記憶體: {memory.total / (1024**3):.1f} GB")
-            info_lines.append("")
-            
-        except Exception as e:
-            info_lines.append(f"[WARN] CPU資訊獲取失敗: {e}")
-        
-        # 檢測GPU
-        gpu_available = False
-        try:
-            import cupy as cp
-            
-            # 測試GPU基本功能
-            test_array = cp.array([1, 2, 3])
-            _ = cp.sum(test_array)
-            cp.cuda.Device().synchronize()
-            
-            # 獲取GPU資訊
-            device_count = cp.cuda.runtime.getDeviceCount()
-            info_lines.append(f"[OK] GPU (CUDA): {device_count} 設備可用")
-            
-            for i in range(device_count):
-                props = cp.cuda.runtime.getDeviceProperties(i)
-                name = props['name'].decode()
-                memory = props['totalGlobalMem'] / (1024**3)
-                compute_capability = f"{props['major']}.{props['minor']}"
+        logger.info("無人機模擬器應用程式初始化完成")
+    
+    def _setup_gpu_environment(self):
+        """設置GPU環境"""
+        if GPU_AVAILABLE and self.config.backend.use_gpu:
+            try:
+                # 檢查GPU系統
+                gpu_checker = GPUSystemChecker()
+                gpu_info = gpu_checker.get_gpu_info()
                 
-                info_lines.append(f"   設備 {i}: {name}")
-                info_lines.append(f"   記憶體: {memory:.1f} GB")
-                info_lines.append(f"   計算能力: {compute_capability}")
-                info_lines.append(f"   多處理器數量: {props['multiProcessorCount']}")
-                
-                if i < device_count - 1:
-                    info_lines.append("")
-            
-            # 更新設備選擇下拉選單
-            device_values = [str(i) for i in range(device_count)]
-            self.device_combo['values'] = device_values
-            
-            gpu_available = True
-            self.gpu_info_label.configure(text="    GPU可用，支援CUDA加速")
-            
-        except ImportError:
-            info_lines.append("[ERROR] GPU (CUDA): CuPy未安裝")
-            info_lines.append("   安裝指令: pip install cupy-cuda11x 或 cupy-cuda12x")
-            self.gpu_info_label.configure(text="    需要安裝CuPy以啟用GPU加速")
-            self.gpu_radio.configure(state='disabled')
-            
-        except Exception as e:
-            info_lines.append(f"[ERROR] GPU檢測失敗: {e}")
-            info_lines.append("   請檢查CUDA驅動程式和工具包安裝")
-            self.gpu_info_label.configure(text="    GPU不可用或CUDA未正確安裝")
-            self.gpu_radio.configure(state='disabled')
+                if gpu_info['available']:
+                    setup_gpu_environment(
+                        device_id=self.config.backend.gpu_device_id,
+                        memory_pool=self.config.backend.memory_pool
+                    )
+                    logger.info(f"GPU環境設置完成: {gpu_info['name']}")
+                else:
+                    logger.warning("GPU不可用，切換到CPU模式")
+                    self.config.backend.use_gpu = False
+                    
+            except Exception as e:
+                logger.error(f"GPU環境設置失敗: {e}")
+                self.config.backend.use_gpu = False
+    
+    def _setup_main_window(self):
+        """設置主視窗"""
+        self.root.title(self.config.ui.window_title)
+        self.root.geometry(self.config.ui.window_geometry)
+        self.root.configure(bg='#1e1e1e')
         
-        # 添加模擬器功能說明
-        info_lines.append("\n" + "="*50)
-        info_lines.append("模擬器功能:")
-        info_lines.append("• 支援QGC waypoint檔案和CSV軌跡檔案")
-        info_lines.append("• 即時3D軌跡可視化與碰撞檢測")
-        info_lines.append("• GPU加速大規模無人機群模擬")
-        info_lines.append("• 自動任務修改與碰撞避讓")
-        info_lines.append("• 支援最多同時模擬1000架無人機")
+        # 最大化視窗
+        if self.config.ui.maximize_on_start:
+            try:
+                self.root.state('zoomed')  # Windows
+            except:
+                try:
+                    self.root.attributes('-zoomed', True)  # Linux
+                except:
+                    pass  # macOS或其他系統
         
-        # 更新資訊顯示
-        self.gpu_info_text.configure(state='normal')
-        self.gpu_info_text.delete(1.0, tk.END)
-        self.gpu_info_text.insert(tk.END, '\n'.join(info_lines))
-        self.gpu_info_text.configure(state='disabled')
-
-    def _on_start_clicked(self):
-        """啟動按鈕點擊處理"""
-        backend_choice = self.backend_var.get()
-        device_id = int(self.device_var.get())
-        enable_fallback = self.fallback_var.get()
-        performance_mode = self.performance_var.get()
+        # 設置圖標和關閉事件
+        self.root.protocol("WM_DELETE_WINDOW", self._on_closing)
         
-        # 轉換後端選擇
-        if backend_choice == "auto":
-            backend = ComputeBackend.AUTO
-        elif backend_choice == "gpu":
-            backend = ComputeBackend.GPU
-        else:
-            backend = ComputeBackend.CPU
+        # 設置主容器
+        self.main_container = tk.Frame(self.root, bg='#1e1e1e')
+        self.main_container.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+    
+    def _initialize_components(self):
+        """初始化主要組件"""
+        # 創建左側控制面板
+        control_frame = tk.Frame(self.main_container, bg='#2d2d2d', 
+                                width=self.config.ui.control_panel_width)
+        control_frame.pack(side=tk.LEFT, fill=tk.Y, padx=(0, 5))
+        control_frame.pack_propagate(False)
         
-        # 設置配置
-        settings.gpu.backend = backend
-        settings.gpu.device_id = device_id
-        settings.gpu.enable_fallback = enable_fallback
+        # 創建右側3D視圖容器
+        plot_container = tk.Frame(self.main_container, bg='#1e1e1e')
+        plot_container.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
         
-        self.result = {
-            'action': 'start',
-            'backend': backend,
-            'device_id': device_id,
-            'enable_fallback': enable_fallback,
-            'performance_mode': performance_mode
+        # 初始化控制面板
+        self.control_panel = CompactControlPanel(control_frame, self.config.ui)
+        
+        # 初始化3D繪圖器
+        self.plotter = Advanced3DPlotter(plot_container, self.config.visualization, 
+                                        self.config.backend.use_gpu)
+        
+        # 初始化模擬器
+        self.simulator = AdvancedDroneSimulator(self.config)
+        
+        logger.info("主要組件初始化完成")
+    
+    def _setup_callbacks(self):
+        """設置回調函數"""
+        callbacks = {
+            'load_qgc': self._load_qgc_files,
+            'load_csv': self._load_csv_files,
+            'create_test': self._create_test_mission,
+            'toggle_play': self._toggle_playback,
+            'stop': self._stop_simulation,
+            'reset': self._reset_simulation,
+            'export': self._export_missions,
+            'time_change': self._on_time_change,
+            'speed_change': self._on_speed_change,
+            'safety_change': self._on_safety_change
         }
         
-        self.root.destroy()
-
-    def _on_test_clicked(self):
-        """性能測試按鈕點擊處理"""
-        self.result = {'action': 'test'}
-        self.root.destroy()
-
-    def _on_help_clicked(self):
-        """幫助按鈕點擊處理"""
-        help_text = """無人機群模擬器 - 使用說明
-
-🚀 核心功能:
-• 3D即時軌跡模擬與可視化
-• GPU加速碰撞檢測與避讓
-• QGC/CSV任務檔案導入支援
-• 智能任務修改與導出
-
-🎯 快速開始:
-1. 選擇計算後端 (推薦自動選擇)
-2. 點擊「啟動模擬器」
-3. 載入任務檔案或創建測試任務
-4. 使用播放控制觀看模擬
-
-⚡ 性能建議:
-• GPU模式: 適合大規模模擬 (50+ 無人機)
-• CPU模式: 適合小規模模擬 (< 50 無人機)
-• 自動模式: 系統自動選擇最佳後端
-
-📁 支援格式:
-• QGC Waypoint (.waypoints)
-• CSV軌跡檔案 (.csv)
-• 支援GPS座標和本地座標系統
-
-🛡️ 安全功能:
-• 即時碰撞檢測
-• 自動避讓路徑生成
-• 安全距離可調整
-• 修改後任務檔案導出
-
-需要更多幫助請查閱使用者手冊。"""
-        
-        messagebox.showinfo("使用說明", help_text)
-
-    def _on_exit_clicked(self):
-        """退出按鈕點擊處理"""
-        self.result = {'action': 'exit'}
-        self.root.destroy()
-
-def safe_get_backend_name(backend_obj):
-    """安全地獲取後端名稱"""
-    try:
-        if isinstance(backend_obj, str):
-            return backend_obj.upper()
-        
-        if hasattr(backend_obj, 'value'):
-            backend_value = backend_obj.value
-            if hasattr(backend_value, 'value'):
-                return backend_value.value.upper()
-            else:
-                return str(backend_value).upper()
-        
-        if hasattr(backend_obj, 'name'):
-            return backend_obj.name.upper()
-        
-        return str(backend_obj).upper()
-        
-    except Exception as e:
-        print(f"[WARN] 獲取後端名稱失敗: {e}")
-        return "UNKNOWN"
-
-def run_performance_test():
-    """運行性能測試"""
-    print("[TEST] 啟動性能測試...")
+        for event, callback in callbacks.items():
+            self.control_panel.register_callback(event, callback)
     
-    # 導入測試工具
-    try:
-        from utils.gpu_utils import compute_manager, performance_monitor, MathOps
-        import numpy as np
-        import time
+    def _setup_menu(self):
+        """設置選單欄"""
+        menubar = tk.Menu(self.root)
+        self.root.config(menu=menubar)
         
-        # 修復：安全地獲取後端名稱
-        backend_name = safe_get_backend_name(compute_manager.backend)
-        print(f"計算後端: {backend_name}")
-        print("=" * 50)
+        # 檔案選單
+        file_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="檔案", menu=file_menu)
+        file_menu.add_command(label="載入QGC檔案", command=self._load_qgc_files)
+        file_menu.add_command(label="載入CSV檔案", command=self._load_csv_files)
+        file_menu.add_separator()
+        file_menu.add_command(label="創建測試任務", command=self._create_test_mission)
+        file_menu.add_separator()
+        file_menu.add_command(label="導出修正任務", command=self._export_missions)
+        file_menu.add_separator()
+        file_menu.add_command(label="退出", command=self._on_closing)
         
-        # 測試1: 基本陣列運算
-        print("測試1: 基本陣列運算")
-        sizes = [1000, 5000, 10000]
+        # 視圖選單
+        view_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="視圖", menu=view_menu)
+        view_menu.add_command(label="俯視角", command=lambda: self.plotter.set_view("top"))
+        view_menu.add_command(label="側視角", command=lambda: self.plotter.set_view("side"))
+        view_menu.add_command(label="3D視角", command=lambda: self.plotter.set_view("3d"))
+        view_menu.add_separator()
+        view_menu.add_command(label="重置視圖", command=self.plotter.reset_view)
         
-        for size in sizes:
-            # 創建測試資料
-            a = np.random.random((size, 3)).astype(np.float32)
-            b = np.random.random((size, 3)).astype(np.float32)
-            
-            # 測試運算時間
-            start_time = time.perf_counter()
-            
-            # 轉換為當前後端格式
-            from utils.gpu_utils import asarray, to_cpu, synchronize
-            a_backend = asarray(a)
-            b_backend = asarray(b)
-            
-            # 執行運算
-            result = a_backend + b_backend
-            result = result * 2.0
-            result_sum = compute_manager.xp.sum(result)
-            
-            # 同步操作
-            synchronize()
-            
-            elapsed = time.perf_counter() - start_time
-            print(f"  大小 {size}: {elapsed*1000:.2f} ms")
+        # 模擬選單
+        sim_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="模擬", menu=sim_menu)
+        sim_menu.add_command(label="播放/暫停", command=self._toggle_playback)
+        sim_menu.add_command(label="停止", command=self._stop_simulation)
+        sim_menu.add_command(label="重置", command=self._reset_simulation)
         
-        # 測試2: 距離計算 (模擬碰撞檢測)
-        print("\n測試2: 距離矩陣計算 (碰撞檢測模擬)")
-        n_points = [50, 100, 200]
+        # 工具選單
+        tools_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="工具", menu=tools_menu)
+        tools_menu.add_command(label="系統信息", command=self._show_system_info)
+        tools_menu.add_command(label="性能統計", command=self._show_performance_stats)
+        tools_menu.add_command(label="GPU設定", command=self._show_gpu_settings)
         
-        for n in n_points:
-            positions = np.random.random((n, 3)).astype(np.float32) * 100
+        # 幫助選單
+        help_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="幫助", menu=help_menu)
+        help_menu.add_command(label="快捷鍵", command=self._show_shortcuts)
+        help_menu.add_command(label="關於", command=self._show_about)
+    
+    def _bind_keyboard_shortcuts(self):
+        """綁定鍵盤快捷鍵"""
+        def on_key_press(event):
+            key = event.keysym.lower()
             
-            start_time = time.perf_counter()
-            if MathOps:
-                distances = MathOps.distance_matrix(positions, positions)
+            if key == 'space':
+                self._toggle_playback()
+            elif key == 'r':
+                self._reset_simulation()
+            elif key == 's':
+                self._stop_simulation()
+            elif key in ['1', '2', '3']:
+                views = {'1': 'top', '2': 'side', '3': '3d'}
+                self.plotter.set_view(views[key])
+            elif key == 'escape':
+                self._on_closing()
+        
+        self.root.bind('<KeyPress>', on_key_press)
+        self.root.focus_set()
+    
+    def _load_qgc_files(self):
+        """載入QGC檔案"""
+        logger.info("使用者請求載入QGC檔案")
+        # 由控制面板處理檔案選擇，這裡只需要處理載入邏輯
+        # 實際的檔案對話框在控制面板中處理
+        pass
+    
+    def _load_csv_files(self):
+        """載入CSV檔案"""  
+        logger.info("使用者請求載入CSV檔案")
+        pass
+    
+    def _create_test_mission(self):
+        """創建測試任務"""
+        logger.info("創建測試任務")
+        try:
+            success = self.simulator.create_test_mission()
+            if success:
+                self._update_display()
+                self.control_panel.show_message("任務創建", "測試任務創建成功", "info")
             else:
-                # CPU回退版本
-                distances = np.zeros((n, n))
-                for i in range(n):
-                    for j in range(i+1, n):
-                        dist = np.linalg.norm(positions[i] - positions[j])
-                        distances[i, j] = distances[j, i] = dist
-            
-            synchronize()
-            elapsed = time.perf_counter() - start_time
-            
-            print(f"  {n}架無人機碰撞檢測: {elapsed*1000:.2f} ms")
+                self.control_panel.show_message("任務創建", "測試任務創建失敗", "error")
+        except Exception as e:
+            logger.error(f"創建測試任務失敗: {e}")
+            self.control_panel.show_message("錯誤", f"創建測試任務失敗: {str(e)}", "error")
+    
+    def _toggle_playback(self):
+        """切換播放狀態"""
+        if not self.simulator.drones:
+            self.control_panel.show_message("播放控制", "請先載入無人機任務", "warning")
+            return
         
-        # 測試3: 記憶體使用
-        print("\n測試3: 記憶體使用情況")
-        try:
-            memory_info = compute_manager.get_memory_info()
-            print(f"  後端: {memory_info['backend']}")
-            print(f"  使用記憶體: {memory_info['used_bytes']/1024**2:.1f} MB")
-            print(f"  總記憶體: {memory_info['total_bytes']/1024**2:.1f} MB")
-        except Exception as mem_e:
-            print(f"  記憶體資訊獲取失敗: {mem_e}")
+        if self.simulator.is_playing:
+            self._pause_simulation()
+        else:
+            self._start_simulation()
+    
+    def _start_simulation(self):
+        """開始模擬"""
+        logger.info("開始模擬")
+        self.simulator.play_simulation()
+        self.control_panel.update_play_button(True)
         
-        # 測試4: 模擬器核心功能
-        print("\n測試4: 模擬器核心功能")
+        # 啟動動畫線程
+        if not self.is_running:
+            self.is_running = True
+            self.animation_thread = threading.Thread(target=self._animation_loop, daemon=True)
+            self.animation_thread.start()
+    
+    def _pause_simulation(self):
+        """暫停模擬"""
+        logger.info("暫停模擬")
+        self.simulator.pause_simulation()
+        self.control_panel.update_play_button(False)
+    
+    def _stop_simulation(self):
+        """停止模擬"""
+        logger.info("停止模擬")
+        self.simulator.stop_simulation()
+        self.control_panel.update_play_button(False)
+        self.is_running = False
+    
+    def _reset_simulation(self):
+        """重置模擬"""
+        logger.info("重置模擬")
+        self.simulator.reset_simulation()
+        self.control_panel.update_play_button(False)
+        self.is_running = False
+        self._update_display()
+    
+    def _export_missions(self):
+        """導出修正後的任務"""
+        if not self.simulator.modified_missions:
+            self.control_panel.show_message("導出", "沒有修正後的任務需要導出", "info")
+            return
+        
+        export_dir = self.control_panel.get_export_directory()
+        if export_dir:
+            try:
+                results = self.simulator.export_modified_missions(export_dir)
+                if results:
+                    message = f"成功導出 {len(results)} 個任務檔案至:\n{export_dir}"
+                    self.control_panel.show_message("導出成功", message, "info")
+                else:
+                    self.control_panel.show_message("導出失敗", "沒有檔案被導出", "error")
+            except Exception as e:
+                logger.error(f"導出任務失敗: {e}")
+                self.control_panel.show_message("導出錯誤", f"導出失敗: {str(e)}", "error")
+    
+    def _on_time_change(self, time_value: float):
+        """時間改變處理"""
+        if not self.simulator.is_playing:
+            self.simulator.seek_to_time(time_value)
+            self._update_display()
+    
+    def _on_speed_change(self, speed: float):
+        """速度改變處理"""
+        self.simulator.set_time_scale(speed)
+        logger.debug(f"模擬速度設置為: {speed}x")
+    
+    def _on_safety_change(self, distance: float):
+        """安全距離改變處理"""
+        self.simulator.collision_system.config.safety_distance = distance
+        logger.debug(f"安全距離設置為: {distance}m")
+    
+    def _animation_loop(self):
+        """動畫循環（在獨立線程中運行）"""
+        while self.is_running:
+            try:
+                current_time = time.time()
+                dt = current_time - self.last_update_time
+                self.last_update_time = current_time
+                
+                # 更新模擬狀態
+                update_result = self.simulator.update_simulation(dt)
+                
+                # 在主線程中更新GUI
+                if update_result['updated']:
+                    self.root.after_idle(self._update_gui_from_simulation, update_result)
+                
+                # 控制更新頻率
+                time.sleep(1.0 / 30.0)  # 30 FPS
+                
+            except Exception as e:
+                logger.error(f"動畫循環錯誤: {e}")
+                self.is_running = False
+                break
+    
+    def _update_gui_from_simulation(self, update_result: Dict[str, Any]):
+        """從模擬結果更新GUI（在主線程中執行）"""
         try:
-            # 測試座標轉換
-            from core.drone_physics import EarthCoordinateSystem
-            coord_system = EarthCoordinateSystem()
-            coord_system.set_origin(24.0, 121.0)
+            # 更新時間顯示
+            self.control_panel.update_time_display(
+                update_result['current_time'], 
+                self.simulator.max_time
+            )
             
-            # 批次座標轉換測試
-            gps_coords = np.random.uniform([24.0, 121.0, 0], [24.01, 121.01, 100], (1000, 3))
+            # 更新無人機狀態指示器
+            for drone_id, drone_state in self.simulator.drones.items():
+                indicator_id = drone_id.lower()
+                current_pos = drone_state.current_position
+                
+                if current_pos:
+                    phase = current_pos.get('phase', 'auto')
+                    status_text = f"✓ {phase}"
+                    color = '#4caf50' if phase in ['auto', 'cruise'] else '#ff9800'
+                else:
+                    status_text = "待機"
+                    color = '#888888'
+                
+                self.control_panel.update_drone_status(indicator_id, status_text, color)
             
-            start_time = time.perf_counter()
-            local_coords = coord_system.batch_convert_to_meters(gps_coords)
-            elapsed = time.perf_counter() - start_time
+            # 更新狀態文字
+            self.control_panel.update_status_text(self.simulator.drones)
             
-            print(f"  1000個GPS座標轉換: {elapsed*1000:.2f} ms")
+            # 更新警告文字
+            self.control_panel.update_warning_text(update_result.get('collision_warnings', []))
             
-            # 測試碰撞系統
-            from core.collision_system import create_collision_system
-            collision_system = create_collision_system()
+            # 更新3D繪圖
+            self.plotter.update_plot(
+                self.simulator.drones,
+                update_result.get('collision_warnings', []),
+                update_result['current_time']
+            )
             
-            positions = {}
-            for i in range(10):
-                positions[f"Drone_{i+1}"] = np.random.uniform(0, 100, 3)
-            
-            start_time = time.perf_counter()
-            warnings = collision_system.detector.check_immediate_collisions(positions)
-            elapsed = time.perf_counter() - start_time
-            
-            print(f"  10架無人機碰撞檢測: {elapsed*1000:.2f} ms")
-            print(f"  檢測到 {len(warnings)} 個碰撞警告")
+            # 檢查模擬是否結束
+            if not self.simulator.is_playing and self.is_running:
+                self.is_running = False
+                self.control_panel.update_play_button(False)
+                logger.info("模擬已完成")
             
         except Exception as e:
-            print(f"  模擬器功能測試失敗: {e}")
-        
-        print("\n[OK] 性能測試完成")
-        
-    except Exception as e:
-        print(f"[ERROR] 性能測試失敗: {e}")
-        import traceback
-        traceback.print_exc()
+            logger.error(f"更新GUI失敗: {e}")
+    
+    def _update_display(self):
+        """更新顯示（靜態更新）"""
+        try:
+            # 更新狀態文字
+            self.control_panel.update_status_text(self.simulator.drones)
+            
+            # 更新時間顯示
+            self.control_panel.update_time_display(
+                self.simulator.current_time,
+                self.simulator.max_time
+            )
+            
+            # 更新3D繪圖
+            if self.simulator.drones:
+                # 獲取當前位置
+                positions = {}
+                for drone_id in self.simulator.drones:
+                    pos = self.simulator.get_drone_position_at_time(drone_id, self.simulator.current_time)
+                    if pos:
+                        self.simulator.drones[drone_id].current_position = pos
+                
+                self.plotter.update_plot(
+                    self.simulator.drones,
+                    [],  # 靜態更新時不檢查碰撞
+                    self.simulator.current_time
+                )
+                
+        except Exception as e:
+            logger.error(f"更新顯示失敗: {e}")
+    
+    def _show_system_info(self):
+        """顯示系統信息"""
+        try:
+            from utils.gpu_utils import GPUSystemChecker
+            
+            gpu_checker = GPUSystemChecker()
+            system_info = gpu_checker.get_system_info()
+            coord_info = self.simulator.coordinate_system.get_system_info()
+            collision_info = self.simulator.collision_system.get_system_status()
+            
+            info_text = f"""系統信息:
 
-def main():
-    """主函數"""
-    # 解析命令列參數
-    parser = argparse.ArgumentParser(description='無人機群模擬器 - 專業版')
-    parser.add_argument('--backend', choices=['cpu', 'gpu', 'auto'], 
+Python版本: {system_info['python_version']}
+平台: {system_info['platform']}
+
+GPU信息:
+- 可用: {'是' if system_info['gpu_available'] else '否'}
+- 驅動版本: {system_info.get('gpu_driver', 'N/A')}
+- 記憶體: {system_info.get('gpu_memory', 'N/A')}
+
+坐標系統:
+- 原點設置: {'是' if coord_info['origin_set'] else '否'}
+- GPU加速: {'啟用' if coord_info['gpu_enabled'] else '禁用'}
+
+碰撞系統:
+- 活動警告: {collision_info['active_warnings']}
+- 安全距離: {collision_info['safety_distance']}m
+- GPU加速: {'啟用' if collision_info['gpu_enabled'] else '禁用'}
+
+模擬狀態:
+- 載入無人機: {len(self.simulator.drones)}
+- 修正任務: {len(self.simulator.modified_missions)}
+"""
+            
+            messagebox.showinfo("系統信息", info_text)
+            
+        except Exception as e:
+            logger.error(f"獲取系統信息失敗: {e}")
+            messagebox.showerror("錯誤", f"無法獲取系統信息: {str(e)}")
+    
+    def _show_performance_stats(self):
+        """顯示性能統計"""
+        status = self.simulator.get_simulation_status()
+        
+        stats_text = f"""性能統計:
+
+模擬狀態:
+- FPS: {status['fps']:.1f}
+- 時間縮放: {status['time_scale']}x
+- GPU記憶體: {status['gpu_memory_mb']:.1f} MB
+
+載入數據:
+- 無人機數量: {status['num_drones']}
+- 碰撞警告: {status['collision_warnings']}
+- 修正任務: {status['modified_missions']}
+
+後端信息:
+- GPU可用: {'是' if status['gpu_available'] else '否'}
+- GPU使用: {'是' if status['use_gpu'] else '否'}
+"""
+        
+        messagebox.showinfo("性能統計", stats_text)
+    
+    def _show_gpu_settings(self):
+        """顯示GPU設定對話框"""
+        # 創建簡單的GPU設定對話框
+        settings_window = tk.Toplevel(self.root)
+        settings_window.title("GPU設定")
+        settings_window.geometry("400x300")
+        settings_window.configure(bg='#2d2d2d')
+        
+        # GPU狀態
+        status_frame = tk.LabelFrame(settings_window, text="GPU狀態", 
+                                    fg='white', bg='#2d2d2d')
+        status_frame.pack(fill=tk.X, padx=10, pady=5)
+        
+        gpu_available = "是" if GPU_AVAILABLE else "否"
+        gpu_using = "是" if self.config.backend.use_gpu else "否"
+        
+        tk.Label(status_frame, text=f"GPU可用: {gpu_available}", 
+                fg='white', bg='#2d2d2d').pack(anchor=tk.W, padx=5, pady=2)
+        tk.Label(status_frame, text=f"GPU使用: {gpu_using}", 
+                fg='white', bg='#2d2d2d').pack(anchor=tk.W, padx=5, pady=2)
+        
+        # 設定選項
+        options_frame = tk.LabelFrame(settings_window, text="設定選項", 
+                                     fg='white', bg='#2d2d2d')
+        options_frame.pack(fill=tk.X, padx=10, pady=5)
+        
+        tk.Button(options_frame, text="性能優化", 
+                 command=self.simulator.optimize_performance,
+                 bg='#007bff', fg='white').pack(pady=5)
+        
+        tk.Button(options_frame, text="記憶體清理",
+                 command=lambda: self.simulator.coordinate_system.optimize_memory_usage(),
+                 bg='#28a745', fg='white').pack(pady=5)
+    
+    def _show_shortcuts(self):
+        """顯示快捷鍵幫助"""
+        shortcuts_text = """快捷鍵說明:
+
+播放控制:
+  空白鍵        播放/暫停
+  R            重置模擬
+  S            停止模擬
+
+視角控制:
+  1            俯視角
+  2            側視角  
+  3            3D視角
+
+縮放控制:
+  滑鼠滾輪     縮放視圖
+  滑鼠拖拽     旋轉視圖
+  雙擊         重置視圖
+
+其他:
+  Ctrl+O       載入檔案
+  Ctrl+S       導出任務
+  F1           顯示幫助
+  ESC          退出程式
+"""
+        
+        messagebox.showinfo("快捷鍵說明", shortcuts_text)
+    
+    def _show_about(self):
+        """顯示關於信息"""
+        about_text = f"""進階無人機群飛模擬器 - GPU版本 v{self.config.version}
+
+專業級特色:
+• GPU/CPU混合加速運算
+• 精確碰撞檢測與軌跡分析
+• 智能LOITER避讓系統  
+• QGC任務檔案自動修正
+• 專業級3D視覺化
+• 支援多種檔案格式導入
+
+安全系統:
+• 實時碰撞檢測 (每0.1秒)
+• 數字小優先權規則
+• 自動LOITER延遲插入
+• 修正後任務檔案導出
+
+技術規格:
+• 真實地理坐標轉換
+• 高性能3D渲染引擎
+• 模組化系統架構
+• 專業GUI設計
+
+開發: 無人機路徑規劃實驗室
+支援: GPU加速並行計算
+"""
+        
+        messagebox.showinfo("關於 - 進階無人機群飛模擬器", about_text)
+    
+    def _on_closing(self):
+        """程式關閉處理"""
+        logger.info("使用者請求關閉應用程式")
+        
+        # 停止模擬
+        self.is_running = False
+        if self.simulator:
+            self.simulator.cleanup()
+        
+        # 清理GUI資源
+        if self.plotter:
+            self.plotter.cleanup()
+        
+        # 關閉視窗
+        self.root.quit()
+        self.root.destroy()
+        
+        logger.info("應用程式已關閉")
+    
+    def run(self):
+        """運行應用程式"""
+        logger.info("啟動無人機模擬器應用程式")
+        
+        # 顯示啟動信息
+        self.control_panel.show_message(
+            "歡迎使用",
+            "進階無人機群飛模擬器 GPU版本\n\n請載入QGC或CSV檔案開始模擬",
+            "info"
+        )
+        
+        try:
+            self.root.mainloop()
+        except KeyboardInterrupt:
+            logger.info("使用者中斷程式")
+            self._on_closing()
+        except Exception as e:
+            logger.error(f"應用程式運行錯誤: {e}")
+            messagebox.showerror("嚴重錯誤", f"應用程式運行時發生錯誤:\n{str(e)}")
+            self._on_closing()
+
+
+def parse_arguments():
+    """解析命令行參數"""
+    parser = argparse.ArgumentParser(description='無人機群飛模擬器 GPU版本')
+    
+    parser.add_argument('--backend', choices=['auto', 'gpu', 'cpu'], 
                        default='auto', help='計算後端選擇')
     parser.add_argument('--device', type=int, default=0, 
                        help='GPU設備ID')
-    parser.add_argument('--no-gui-select', action='store_true',
-                       help='跳過GUI後端選擇對話框')
-    parser.add_argument('--test', action='store_true',
-                       help='運行性能測試後退出')
-    parser.add_argument('--log-level', default='INFO',
-                       choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'],
-                       help='日誌級別')
-    parser.add_argument('--max-drones', type=int, default=100,
-                       help='最大同時模擬無人機數量')
+    parser.add_argument('--test', action='store_true', 
+                       help='運行性能測試')
+    parser.add_argument('--debug', action='store_true', 
+                       help='啟用調試模式')
+    parser.add_argument('--config', type=str, 
+                       help='自定義配置檔案路徑')
     
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def main():
+    """主函數"""
+    print("無人機群飛模擬器 GPU版本啟動中...")
     
-    # 設置日誌級別
-    logging.getLogger().setLevel(getattr(logging, args.log_level))
-    
-    print("🚁 無人機群模擬器 - 專業版")
-    print("=" * 50)
-    print("功能特色:")
-    print("• 3D即時軌跡模擬與可視化")
-    print("• GPU加速碰撞檢測與避讓")
-    print("• QGC/CSV任務檔案導入")
-    print("• 智能任務修改與導出")
-    print("• 支援大規模無人機群模擬")
-    print("=" * 50)
-    
-    # 直接運行測試
-    if args.test:
-        run_performance_test()
-        return
-    
-    # 後端配置
-    if args.no_gui_select:
-        # 命令列模式
-        backend_map = {
-            'auto': ComputeBackend.AUTO,
-            'gpu': ComputeBackend.GPU,
-            'cpu': ComputeBackend.CPU
-        }
-        set_compute_backend(backend_map[args.backend], args.device)
-        action = 'start'
-        result = {'performance_mode': 'balanced'}
-    else:
-        # GUI選擇模式
-        try:
-            selector = BackendSelector()
-            result = selector.show_selection_dialog()
-            
-            if not result or result.get('action') == 'exit':
-                print("[EXIT] 使用者取消，程式退出")
-                return
-            
-            action = result.get('action')
-            
-            if action == 'test':
-                run_performance_test()
-                return
-            elif action == 'start':
-                set_compute_backend(result['backend'], result['device_id'])
+    try:
+        # 解析命令行參數
+        args = parse_arguments()
         
-        except Exception as e:
-            logger.error(f"GUI選擇器錯誤: {e}")
-            print("回退到命令列模式...")
-            set_compute_backend(ComputeBackend.AUTO, 0)
-            action = 'start'
-            result = {'performance_mode': 'balanced'}
-    
-    if action == 'start':
-        # 顯示後端資訊
-        try:
-            backend_info = get_compute_backend_info()
-            backend_name = safe_get_backend_name(backend_info['backend'])
-            print(f"[OK] 計算後端: {backend_name}")
-            if backend_info['device_id'] is not None:
-                print(f"[GPU] GPU設備ID: {backend_info['device_id']}")
-            
-            performance_mode = result.get('performance_mode', 'balanced')
-            print(f"[設定] 性能模式: {performance_mode}")
-            print(f"[設定] 最大無人機數: {args.max_drones}")
-            
-        except Exception as e:
-            print(f"[WARN] 無法獲取後端資訊: {e}")
-            backend_info = {'backend': 'CPU', 'device_id': None}
+        # 設置調試模式
+        if args.debug:
+            logging.getLogger().setLevel(logging.DEBUG)
+            logger.info("調試模式已啟用")
         
-        # 啟動主程序
-        try:
-            print("[START] 啟動主程序...")
-            
-            # 導入並啟動完整模擬器GUI
-            from gui.main_window import DroneSimulatorApp
-            
-            # 創建主應用程式
-            root = tk.Tk()
-            app = DroneSimulatorApp(root, backend_info)
-            
-            # 設置性能參數
-            if hasattr(app, 'max_drones'):
-                app.max_drones = args.max_drones
-            
-            # 運行主循環
-            print("[INFO] GUI已啟動，請使用圖形介面操作")
-            root.mainloop()
-            
-        except ImportError as e:
-            logger.error(f"導入主程序失敗: {e}")
-            print("[ERROR] 請確保所有依賴項目都已安裝")
-            print("基本依賴: pip install matplotlib pandas numpy")
-            print("GPU支援: pip install cupy-cuda11x 或 cupy-cuda12x")
-            print("完整安裝: pip install -r requirements.txt")
-            
-        except Exception as e:
-            logger.error(f"主程序運行錯誤: {e}")
-            import traceback
-            traceback.print_exc()
+        # 更新後端設定
+        config_manager = get_config_manager()
+        if args.backend != 'auto':
+            backend_type = BackendType.GPU if args.backend == 'gpu' else BackendType.CPU
+            config_manager.update_backend_config(
+                backend_type, 
+                use_gpu=(args.backend == 'gpu'),
+                gpu_device=args.device
+            )
+        
+        # 載入自定義配置
+        if args.config and os.path.exists(args.config):
+            config_manager.load_config(args.config)
+            logger.info(f"載入自定義配置: {args.config}")
+        
+        # 運行性能測試
+        if args.test:
+            from utils.gpu_utils import run_performance_benchmark
+            logger.info("運行性能測試...")
+            run_performance_benchmark()
+            return
+        
+        # 確保日誌目錄存在
+        os.makedirs('logs', exist_ok=True)
+        os.makedirs('exports', exist_ok=True)
+        
+        # 設置matplotlib後端
+        import matplotlib
+        matplotlib.use('TkAgg')
+        
+        # 中文字體支援
+        import matplotlib.pyplot as plt
+        plt.rcParams['font.sans-serif'] = ['SimHei', 'Arial Unicode MS', 'DejaVu Sans']
+        plt.rcParams['axes.unicode_minus'] = False
+        
+        # 高性能設置
+        plt.rcParams['path.simplify'] = True
+        plt.rcParams['path.simplify_threshold'] = 0.1
+        plt.rcParams['agg.path.chunksize'] = 10000
+        
+        # 創建並運行應用程式
+        app = DroneSimulatorApp()
+        app.run()
+        
+    except ImportError as e:
+        print(f"缺少依賴庫: {e}")
+        print("基本依賴: pip install matplotlib pandas numpy")
+        print("GPU依賴: pip install cupy-cuda12x")
+        sys.exit(1)
+        
+    except Exception as e:
+        logger.error(f"程式啟動失敗: {e}")
+        print(f"程式啟動失敗: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
