@@ -1,0 +1,9 @@
+2025-08-29 13:51:16 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-29 13:51:16 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-29 13:51:16 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-29 13:51:16 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-29 13:51:16 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-29 13:51:16 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-29 13:51:16 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-29 13:51:41 | INFO     | gui.main_window | set_origin:76 | 設置座標原點: (24.000000, 121.000000)
+2025-08-29 13:51:47 | INFO     | gui.main_window | reset_simulation:1045 | 模擬已重置

@@ -1,0 +1,99 @@
+2025-08-28 15:23:35 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 15:23:35 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 15:23:35 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 15:23:35 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 15:23:35 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 15:23:35 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 15:23:35 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 15:31:27 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 15:31:27 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 15:31:27 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 15:31:27 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 15:31:27 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 15:31:27 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 15:31:27 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 15:33:27 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 15:33:27 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 15:33:27 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 15:33:27 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 15:33:27 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 15:33:27 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 15:33:27 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 15:34:30 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 15:34:30 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 15:34:30 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 15:34:30 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 15:34:30 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 15:34:30 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 15:34:30 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 15:35:11 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 15:35:11 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 15:35:11 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 15:35:11 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 15:35:11 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 15:35:11 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 15:35:11 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 15:35:25 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 15:35:25 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 15:35:25 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 15:35:25 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 15:35:25 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 15:35:25 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 15:35:25 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 15:35:40 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 15:35:40 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 15:35:40 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 15:35:40 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 15:35:40 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 15:35:40 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 15:35:40 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 15:35:53 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 15:35:53 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 15:35:53 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 15:35:53 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 15:35:53 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 15:35:53 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 15:35:53 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 15:55:48 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 15:55:48 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 15:55:48 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 15:55:48 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 15:55:48 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 15:55:48 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 15:55:48 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 16:04:07 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 16:04:07 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 16:04:07 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 16:04:07 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 16:04:07 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 16:04:07 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 16:04:07 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 16:04:27 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 16:04:27 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 16:04:27 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 16:04:27 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 16:04:27 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 16:04:27 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 16:04:27 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 16:04:31 | ERROR    | root | main:509 | 導入主程序失敗: cannot import name 'DroneSimulatorApp' from 'gui.main_window' (c:\Users\User\Documents\drone_simulator\gui\main_window.py)
+2025-08-28 16:16:17 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 16:16:17 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 16:16:17 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 16:16:17 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 16:16:17 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 16:16:17 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 16:16:17 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 16:24:56 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 16:24:56 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 16:24:56 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 16:24:56 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 16:24:56 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 16:24:56 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 16:24:56 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-28 16:32:48 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-28 16:32:48 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-28 16:32:48 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-28 16:32:48 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-28 16:32:48 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-28 16:32:48 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-28 16:32:48 | INFO     | utils.logging_config | setup_logging:65 | ============================================================

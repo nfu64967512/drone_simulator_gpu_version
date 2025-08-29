@@ -82,3 +82,196 @@
 2025-08-27 09:44:43 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
 2025-08-27 09:44:43 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
 2025-08-27 09:44:43 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 10:02:23 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 10:02:23 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 10:02:23 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 10:02:23 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 10:02:21 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 10:02:23 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 10:02:23 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 10:02:23 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 10:02:23 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 10:02:23 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 10:02:23 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 10:02:23 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 10:27:01 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 10:27:01 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 10:27:01 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 10:27:01 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 10:26:59 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 10:27:01 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 10:27:01 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 10:27:01 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 10:27:01 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 10:27:01 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 10:27:01 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 10:27:01 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 15:13:58 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 15:13:58 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 15:13:58 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 15:13:58 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 15:13:43 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 15:13:58 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 15:13:58 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:13:58 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 15:13:58 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 15:13:58 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 15:13:58 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 15:13:58 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 15:14:51 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 15:14:51 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 15:14:51 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 15:14:51 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 15:14:50 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 15:14:51 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 15:14:51 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:14:51 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 15:14:51 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 15:14:51 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 15:14:51 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 15:14:51 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 15:15:32 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 15:15:32 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 15:15:32 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 15:15:32 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 15:15:31 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 15:15:32 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 15:15:32 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:15:32 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 15:15:32 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 15:15:32 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 15:15:32 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 15:15:32 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 15:18:02 | CPU | INFO     | utils.gpu_utils | _detect_gpu:68 | ✅ GPU (CUDA) 檢測成功
+2025-08-27 15:18:02 | CPU | INFO     | utils.gpu_utils | _log_backend_info:93 | 🚀 GPU後端啟用
+2025-08-27 15:18:02 | CPU | INFO     | utils.gpu_utils | _log_backend_info:94 | 📱 設備: NVIDIA GeForce GTX 1050
+2025-08-27 15:18:02 | CPU | INFO     | utils.gpu_utils | _log_backend_info:95 | 💾 記憶體限制: 0.0 GB
+2025-08-27 15:18:00 | GPU | INFO     | utils.logging_config | setup_logging:219 | ============================================================
+2025-08-27 15:18:02 | GPU | INFO     | utils.logging_config | setup_logging:220 | 🚁 無人機群模擬器日誌系統啟動
+2025-08-27 15:18:02 | GPU | INFO     | utils.logging_config | setup_logging:221 | 📁 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:18:02 | GPU | INFO     | utils.logging_config | setup_logging:222 | 📊 日誌級別: INFO
+2025-08-27 15:18:02 | GPU | INFO     | utils.logging_config | setup_logging:223 | 🖥️  控制台輸出: 啟用
+2025-08-27 15:18:02 | GPU | INFO     | utils.logging_config | setup_logging:224 | 📄 檔案輸出: 啟用
+2025-08-27 15:18:02 | GPU | INFO     | utils.logging_config | setup_logging:225 | 📋 JSON輸出: 禁用
+2025-08-27 15:18:02 | GPU | INFO     | utils.logging_config | setup_logging:226 | ============================================================
+2025-08-27 15:21:53 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:21:53 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:21:53 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:21:53 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:21:53 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:21:53 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:21:53 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:22:57 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:22:57 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:22:57 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:22:57 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:22:57 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:22:57 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:22:57 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:24:58 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:24:58 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:24:58 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:24:58 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:24:58 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:24:58 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:24:58 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:24:58 | ERROR    | root | main:472 | 導入主程序失敗: cannot import name 'SimulatorConfig' from 'config.settings' (c:\Users\User\Documents\drone_simulator\config\settings.py)
+2025-08-27 15:28:48 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:28:48 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:28:48 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:28:48 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:28:48 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:28:48 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:28:48 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:30:19 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:30:19 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:30:19 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:30:19 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:30:19 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:30:19 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:30:19 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:30:19 | ERROR    | root | main:472 | 導入主程序失敗: cannot import name 'SimulatorConfig' from 'config.settings' (c:\Users\User\Documents\drone_simulator\config\settings.py)
+2025-08-27 15:31:32 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:31:32 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:31:32 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:31:32 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:31:32 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:31:32 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:31:32 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:32:24 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:32:24 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:32:24 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:32:24 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:32:24 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:32:24 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:32:24 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:32:35 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:32:35 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:32:35 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:32:35 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:32:35 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:32:35 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:32:35 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:32:35 | WARNING  | utils.gpu_utils | _detect_gpu:74 | [WARN] GPU檢測失敗: module 'cupy' has no attribute 'array'
+2025-08-27 15:32:35 | INFO     | utils.gpu_utils | _log_backend_info:97 | [CPU] CPU後端啟用
+2025-08-27 15:35:41 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:35:41 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:35:41 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:35:41 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:35:41 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:35:41 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:35:41 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:35:41 | ERROR    | root | main:472 | 導入主程序失敗: cannot import name 'SimulatorConfig' from 'config.settings' (c:\Users\User\Documents\drone_simulator\config\settings.py)
+2025-08-27 15:36:15 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:36:15 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:36:15 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:36:15 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:36:15 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:36:15 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:36:15 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:36:15 | ERROR    | root | main:472 | 導入主程序失敗: cannot import name 'SimulatorConfig' from 'config.settings' (c:\Users\User\Documents\drone_simulator\config\settings.py)
+2025-08-27 15:44:15 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 15:44:15 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 15:44:15 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 15:44:15 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 15:44:15 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 15:44:15 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 15:44:15 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 15:44:38 | WARNING  | utils.gpu_utils | _detect_gpu:74 | [WARN] GPU檢測失敗: module 'cupy' has no attribute 'array'
+2025-08-27 15:44:38 | INFO     | utils.gpu_utils | _log_backend_info:97 | [CPU] CPU後端啟用
+2025-08-27 16:14:24 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 16:14:24 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 16:14:24 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 16:14:24 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 16:14:24 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 16:14:24 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 16:14:24 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 16:15:15 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 16:15:15 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 16:15:15 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 16:15:15 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 16:15:15 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 16:15:15 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 16:15:15 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 18:10:16 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 18:10:16 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 18:10:16 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 18:10:16 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 18:10:16 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 18:10:16 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 18:10:16 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 18:16:29 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 18:16:29 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 18:16:29 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 18:16:29 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 18:16:29 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 18:16:29 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 18:16:29 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 18:17:03 | INFO     | utils.logging_config | setup_logging:59 | ============================================================
+2025-08-27 18:17:03 | INFO     | utils.logging_config | setup_logging:60 | [SETUP] 無人機群模擬器日誌系統啟動
+2025-08-27 18:17:03 | INFO     | utils.logging_config | setup_logging:61 | [DIR] 日誌目錄: C:\Users\User\Documents\drone_simulator\logs
+2025-08-27 18:17:03 | INFO     | utils.logging_config | setup_logging:62 | [STATS] 日誌級別: INFO
+2025-08-27 18:17:03 | INFO     | utils.logging_config | setup_logging:63 | [DESKTOP] 控制台輸出: 啟用
+2025-08-27 18:17:03 | INFO     | utils.logging_config | setup_logging:64 | [FILE] 檔案輸出: 啟用
+2025-08-27 18:17:03 | INFO     | utils.logging_config | setup_logging:65 | ============================================================
+2025-08-27 18:17:10 | ERROR    | root | main:472 | 導入主程序失敗: cannot import name 'UILabels' from 'config.settings' (c:\Users\User\Documents\drone_simulator\config\settings.py)

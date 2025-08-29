@@ -5,9 +5,9 @@ GUI module for drone simulator
 __version__ = "5.2.0"
 
 try:
-    from .main_window import *
-    from .control_panel import *
-    from .plot_manager import *
+    from gui.main_window import *
+    from gui.control_panel import *
+    from gui.plot_manager import *
     
     # 確保這些類可用
     __all__ = [
