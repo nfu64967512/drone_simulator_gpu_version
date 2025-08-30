@@ -18,7 +18,7 @@ except ImportError:
 
 from utils.gpu_utils import get_array_module, ensure_gpu_compatibility
 from config.settings import FlightConfig
-from .coordinate_system import EarthCoordinateSystem
+from core.coordinate_system import EarthCoordinateSystem
 logger = logging.getLogger(__name__)
 
 class FlightPhase(Enum):

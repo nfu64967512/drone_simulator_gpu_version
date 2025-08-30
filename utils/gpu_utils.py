@@ -101,6 +101,27 @@ class GPUSystemChecker:
     
     def __init__(self):
         self.gpu_info = self._detect_gpu_info()
+    
+    def _safe_decode_gpu_name(self, name_value) -> str:
+        """
+        安全地處理GPU名稱，兼容不同的CuPy版本
+        
+        Args:
+            name_value: GPU名稱值，可能是bytes、str或其他類型
+            
+        Returns:
+            解碼後的字符串
+        """
+        try:
+            if isinstance(name_value, bytes):
+                return name_value.decode('utf-8')
+            elif isinstance(name_value, str):
+                return name_value
+            else:
+                return str(name_value)
+        except Exception as e:
+            logger.warning(f"GPU名稱解碼失敗: {e}")
+            return "Unknown GPU"
         
     def _detect_gpu_info(self) -> Dict[str, Any]:
         """檢測GPU信息"""
@@ -124,10 +145,13 @@ class GPUSystemChecker:
                 attributes = device.attributes
                 free_mem, total_mem = cp.cuda.runtime.memGetInfo()
                 
+                # 安全地獲取GPU名稱
+                gpu_name = self._safe_decode_gpu_name(attributes.get('Name', 'Unknown'))
+                
                 return {
                     'available': True,
                     'device_count': device_count,
-                    'name': attributes['Name'],
+                    'name': gpu_name,
                     'compute_capability': f"{attributes['ComputeCapabilityMajor']}.{attributes['ComputeCapabilityMinor']}",
                     'total_memory_mb': total_mem / (1024**2),
                     'free_memory_mb': free_mem / (1024**2),

@@ -378,7 +378,7 @@ class DroneSimulatorLogger:
         
         # GPU信息
         try:
-            from ..utils.gpu_utils import GPUSystemChecker
+            from utils.gpu_utils import GPUSystemChecker
             checker = GPUSystemChecker()
             gpu_info = checker.get_gpu_info()
             

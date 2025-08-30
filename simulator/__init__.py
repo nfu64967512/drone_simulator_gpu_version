@@ -249,7 +249,7 @@ def get_simulator_class():
         AdvancedDroneSimulator class
     """
     try:
-        from .drone_simulator import AdvancedDroneSimulator
+        from simulator.drone_simulator import AdvancedDroneSimulator
         return AdvancedDroneSimulator
     except ImportError as e:
         logger.error(f"Failed to import AdvancedDroneSimulator: {e}")

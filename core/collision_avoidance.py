@@ -556,7 +556,7 @@ def create_collision_system(safety_distance: float = 5.0,
     Returns:
         配置好的碰撞避免系統
     """
-    from ..config.settings import SafetyConfig
+    from config.settings import SafetyConfig
     
     config = SafetyConfig(
         safety_distance=safety_distance,

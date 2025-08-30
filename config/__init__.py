@@ -4,7 +4,7 @@
 """
 
 # 從新的 settings 模組導入所有配置類別和函數
-from .settings import (
+from config.settings import (
     BackendType,
     SafetyConfig,
     FlightConfig,
